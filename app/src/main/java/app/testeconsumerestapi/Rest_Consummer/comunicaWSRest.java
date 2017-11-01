@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import java.io.BufferedReader;
 import java.io.Console;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,6 +22,8 @@ public class comunicaWSRest extends AsyncTask<Void, Void, Void> {
     private String enviar = "";
     private String retorno = "";
     private int    httpCode = 0;
+    private String data = "";
+
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -37,6 +40,17 @@ public class comunicaWSRest extends AsyncTask<Void, Void, Void> {
             URL url = new URL(this.url);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod(this.metodo);
+
+            urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            urlConnection.setDoOutput(true);
+            urlConnection.setDoInput(true);
+
+            if(this.metodo == "POST" || this.metodo == "PUT"){
+                try(DataOutputStream wr = new DataOutputStream( urlConnection.getOutputStream())) {
+                    wr.write(data.getBytes());
+                }
+            }
+
             urlConnection.connect();
             InputStream inputStream = urlConnection.getInputStream();
             if (inputStream == null) {
@@ -122,5 +136,13 @@ public class comunicaWSRest extends AsyncTask<Void, Void, Void> {
 
     public void setHttpCode(int httpCode) {
         this.httpCode = httpCode;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

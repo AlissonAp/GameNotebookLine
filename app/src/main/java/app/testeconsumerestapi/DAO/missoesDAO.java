@@ -10,7 +10,7 @@ import java.util.List;
 
 import app.testeconsumerestapi.db.BancoDados;
 import app.testeconsumerestapi.models.Missao;
-import app.testeconsumerestapi.utils.infoSearchAPI;
+import app.testeconsumerestapi.utils.Rest_API;
 
 /**
  * Created by Alisson on 02/10/2017.
@@ -32,7 +32,7 @@ public class missoesDAO {
 
         int contaErros = 0;
 
-        infoSearchAPI pecasAPI = new infoSearchAPI();
+        Rest_API pecasAPI = new Rest_API();
         //Busca todas as peças disponíveis na API Node
         List<Missao> missoes =  pecasAPI.buscarMissoes(query);
 

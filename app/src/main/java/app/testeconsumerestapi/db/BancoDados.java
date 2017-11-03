@@ -41,7 +41,7 @@ public class BancoDados extends SQLiteOpenHelper{
     public static final String pecaInformacoes = "informacoes";
     public static final String pecaPreco       = "preco";
     public static final String pecaPropriedades= "propriedades";
-    public static final String pecaNivel       = "nivel";
+    public static final String pecaNivel          = "nivel";
     public static final String pecaImagem      = "imagem";
     public static final String pecaCadastro    = "dataCadastro";
 
@@ -52,6 +52,10 @@ public class BancoDados extends SQLiteOpenHelper{
     public static final String missaoRegras    = "regras";
     public static final String missaoCadastro  = "dataCadastro";
 
+
+    public static final String selectMissao    =  "SELECT * FROM "+tblMissoes+ ";";
+    public static final String selectPeca      =  "SELECT * FROM "+tblPecas+ ";";
+    public static final String selectUsuario   =  "SELECT * FROM "+tblUsuarios+ ";";
 
     public BancoDados(Context context){
         super(context,BANCO_CLIENTE,null,VERSAO_BANCO);

@@ -41,11 +41,13 @@ public class comunicaWSRest extends AsyncTask<Void, Void, Void> {
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod(this.metodo);
 
+            if(this.metodo == "POST" || this.metodo == "PUT"){
+
             urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             urlConnection.setDoOutput(true);
             urlConnection.setDoInput(true);
 
-            if(this.metodo == "POST" || this.metodo == "PUT"){
+
                 try(DataOutputStream wr = new DataOutputStream( urlConnection.getOutputStream())) {
                     wr.write(data.getBytes());
                 }

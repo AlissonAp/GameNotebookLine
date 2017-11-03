@@ -25,30 +25,30 @@ public class missoesDAO {
         banco = new BancoDados(context);
     }
 
-    public boolean InsertPecasFromAPI(String query){
+    public boolean InsertMissoesFromAPI(String query, Context context){
 
         long resultado;
-        ContentValues valores;
+        ContentValues cv;
 
         int contaErros = 0;
 
         Rest_API pecasAPI = new Rest_API();
         //Busca todas as peças disponíveis na API Node
-        List<Missao> missoes =  pecasAPI.buscarMissoes(query);
+        List<Missao> missoes =  pecasAPI.buscarMissoes(query,context);
 
         db = banco.getWritableDatabase();
 
-        for(Missao m : missoes){
+        for(Missao missao : missoes){
 
-            valores = new ContentValues();
+            cv = new ContentValues();
 
-            valores.put(BancoDados.missaoCodigo, m.id );
-            valores.put(BancoDados.missaoNome, m.nome);
-            valores.put(BancoDados.missaoObjetivo, m.objetivo);
-            valores.put(BancoDados.missaoRegras, m.regras);
-            valores.put(BancoDados.missaoCadastro, String.valueOf(m.dataCadastro));
+            cv.put(BancoDados.missaoCodigo,missao.getId());
+            cv.put(BancoDados.missaoNome, missao.getNome());
+            cv.put(BancoDados.missaoObjetivo , missao.getObjetivo());
+            cv.put(BancoDados.missaoRegras , missao.getRegras());
+            cv.put(BancoDados.missaoCadastro, missao.getDataCadastro());
 
-            resultado = db.insert(BancoDados.tblMissoes, null, valores);
+            resultado = db.insert(BancoDados.tblMissoes, null, cv);
 
             if (resultado ==-1) {
                 contaErros++;

@@ -16,7 +16,7 @@ public class Usuario {
     private Number pontuacao;
     private Number ultimaMissao;
     private Number dinheiro;
-    private long ultimoAcesso;
+    private String ultimoAcesso;
 
     public String getId() {
         return id;
@@ -82,11 +82,11 @@ public class Usuario {
         this.dinheiro = dinheiro;
     }
 
-    public long getUltimoAcesso() {
+    public String getUltimoAcesso() {
         return ultimoAcesso;
     }
 
-    public void setUltimoAcesso(long ultimoAcesso) {
+    public void setUltimoAcesso(String ultimoAcesso) {
         this.ultimoAcesso = ultimoAcesso;
     }
 }

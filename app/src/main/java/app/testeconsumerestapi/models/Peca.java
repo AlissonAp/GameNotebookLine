@@ -11,45 +11,86 @@ import java.util.Date;
 
 public class Peca {
 
-    @SerializedName("_id")
-    @Expose
-    public String _id;
 
-    @SerializedName("descricao")
-    @Expose
-    public String descricao;
+    private String _id;
+    private String  descricao;
+    private Integer categoria;
+    private String  informacoes;
+    private Integer preco;
+    private String  propriedades;
+    private Integer nivel;
+    private String  imagem;
+    private String  dataCadastro;
 
-    @SerializedName("categoria")
-    @Expose
-    public Number categoria;
+    public String get_id() {
+        return _id;
+    }
 
-    @SerializedName("informacoes")
-    @Expose
-    public String informacoes;
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
-    @SerializedName("preco")
-    @Expose
-    public Number preco;
+    public String getDescricao() {
+        return descricao;
+    }
 
-    @SerializedName("propriedades")
-    @Expose
-    public String propriedades;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-    @SerializedName("nivel")
-    @Expose
-    public Number nivel;
+    public Integer getCategoria() {
+        return categoria;
+    }
 
-    @SerializedName("imagem")
-    @Expose
-    public String imagem;
+    public void setCategoria(Integer categoria) {
+        this.categoria = categoria;
+    }
 
-    @SerializedName("JsonPropriedades")
-    @Expose
-    public String JsonPropriedades;
+    public String getInformacoes() {
+        return informacoes;
+    }
 
-    @SerializedName("dataCadastro")
-    @Expose
-    public Date dataCadastro;
+    public void setInformacoes(String informacoes) {
+        this.informacoes = informacoes;
+    }
 
+    public Integer getPreco() {
+        return preco;
+    }
 
+    public void setPreco(Integer preco) {
+        this.preco = preco;
+    }
+
+    public String getPropriedades() {
+        return propriedades;
+    }
+
+    public void setPropriedades(String propriedades) {
+        this.propriedades = propriedades;
+    }
+
+    public Integer getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Integer nivel) {
+        this.nivel = nivel;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
+    public String getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
 }

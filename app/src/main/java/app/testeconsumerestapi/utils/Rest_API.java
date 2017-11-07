@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import app.testeconsumerestapi.Rest_Consummer.comunicaWSRest;
 import app.testeconsumerestapi.models.Missao;
@@ -54,6 +55,7 @@ public class Rest_API {
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e);
             return new ArrayList<Peca>();
         }
 
@@ -62,9 +64,7 @@ public class Rest_API {
     public List<Missao> buscarMissoes(String id, Context contexto) {
 
         missoes.clear();
-
         try {
-
             comunicaWSRest ws = new comunicaWSRest();
 
             //Seta configurações de comunicação
@@ -77,19 +77,21 @@ public class Rest_API {
             ws.setMetodo("GET");
 
             ws.execute();
+
             ws.get();
 
-            if(ws.getHttpCode() != 500){ //Internal error
+
+            if (ws.getHttpCode() != 500) { //Internal error
 
                 List<Missao> missoes = new jsonToModel().MissoesFromJSON(ws.getRetorno());
                 return missoes;
-            }else{
-                return new ArrayList<Missao>();
+            } else {
+                return new ArrayList<>();
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ArrayList<Missao>();
+        }catch(Exception ex){
+            System.out.println("Excessao" +ex);
+            return new ArrayList<>();
         }
 
     }

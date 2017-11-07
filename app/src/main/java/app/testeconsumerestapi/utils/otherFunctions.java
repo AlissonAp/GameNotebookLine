@@ -18,6 +18,7 @@ import app.testeconsumerestapi.Rest_Consummer.comunicaWSRest;
 import app.testeconsumerestapi.db.BancoDados;
 import app.testeconsumerestapi.models.Missao;
 import app.testeconsumerestapi.models.Peca;
+import app.testeconsumerestapi.models.propriedadesPeca;
 
 /**
  * Created by Alisson on 01/11/2017.
@@ -92,7 +93,12 @@ public class otherFunctions {
                 peca.setCategoria(c.getInt(c.getColumnIndex(BancoDados.pecaCategoria)));
                 peca.setDescricao(c.getString(c.getColumnIndex(BancoDados.pecaDescricao)));
                 peca.setInformacoes(c.getString(c.getColumnIndex(BancoDados.pecaInformacoes)));
-                peca.setPropriedades(c.getString(c.getColumnIndex(BancoDados.pecaPropriedades)));
+
+                propriedadesPeca propsPeca = new propriedadesPeca();
+
+                propsPeca = new jsonToModel().propriedadesPecaFromJSON(c.getString(c.getColumnIndex(BancoDados.pecaPropriedades)));
+
+                peca.setPropriedades(propsPeca);
                 peca.setImagem(c.getString(c.getColumnIndex(BancoDados.pecaImagem)));
                 peca.setNivel(c.getInt(c.getColumnIndex(BancoDados.pecaNivel)));
                 peca.setPreco(c.getInt(c.getColumnIndex(BancoDados.pecaPreco)));

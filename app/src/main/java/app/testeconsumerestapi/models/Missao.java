@@ -11,8 +11,9 @@ public class Missao {
     private String id;
     private String nome;
     private String objetivo;
-    private String regras;
+    private regrasMissao regras;
     private String dataCadastro;
+    private Integer XP;
 
     public String getId() {
         return id;
@@ -38,11 +39,11 @@ public class Missao {
         this.objetivo = objetivo;
     }
 
-    public String getRegras() {
+    public regrasMissao getRegras() {
         return regras;
     }
 
-    public void setRegras(String regras) {
+    public void setRegras(regrasMissao regras) {
         this.regras = regras;
     }
 
@@ -54,4 +55,11 @@ public class Missao {
         this.dataCadastro = dataCadastro;
     }
 
+    public Integer getXP() {
+        return XP;
+    }
+
+    public void setXP(Integer XP) {
+        this.XP = XP;
+    }
 }

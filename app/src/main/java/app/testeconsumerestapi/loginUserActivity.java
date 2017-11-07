@@ -25,6 +25,9 @@ public class loginUserActivity  extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
+        this.deleteDatabase("bd_notebookline_new");
+        this.deleteDatabase("bd_notebookline");
+        this.deleteDatabase("bd_notebookline2");
     }
 
 
@@ -37,25 +40,31 @@ public class loginUserActivity  extends AppCompatActivity{
 
         userFunctions function = new userFunctions();
 
-        request retornoAPI = function.FazerLogin(email,senha,view.getContext());
 
-        if(retornoAPI.status != 500){
-            retorno = retornoAPI.msg;
+        if(!email.getText().toString().isEmpty() && !senha.getText().toString().isEmpty()) {
 
-            if(retornoAPI.ok == true){ //Se entrou aqui pode seguir adiante, o usuário foi validado com sucesso
-                //Carrega dados de missoes e peças para salvar localmente
-                new otherFunctions().LoadData(view.getContext());
+            request retornoAPI = function.FazerLogin(email, senha, view.getContext());
 
-                //Aqui vai dimensionar para a tela de listagem das missoes
-                Intent missoesScreen = new Intent(this,listMissaoActivity.class);
-
-                startActivity(missoesScreen);
-
-            }else{
+            if (retornoAPI.status != 500) {
                 retorno = retornoAPI.msg;
+
+                if (retornoAPI.ok == true) { //Se entrou aqui pode seguir adiante, o usuário foi validado com sucesso
+                    //Carrega dados de missoes e peças para salvar localmente
+                    new otherFunctions().LoadData(view.getContext());
+
+                    //Aqui vai dimensionar para a tela de listagem das missoes
+                    Intent missoesScreen = new Intent(this, listMissaoActivity.class);
+
+                    startActivity(missoesScreen);
+
+                } else {
+                    retorno = retornoAPI.msg;
+                }
+            } else {
+                retorno = "Houve uma falha ao validar o usuário";
             }
         }else{
-            retorno = "Houve uma falha ao validar o usuário";
+            retorno = "É necessário informar o e-mail e a senha!";
         }
 
         function.enviarNotificacao(view.getContext(),retorno);

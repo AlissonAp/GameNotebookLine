@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class BancoDados extends SQLiteOpenHelper{
 
-    private static final int VERSAO_BANCO = 1;
-    private static final String BANCO_CLIENTE = "bd_notebookline";
+    private static final int VERSAO_BANCO = 3;
+    private static final String BANCO_CLIENTE = "bd_teste.db";
     private static String QUERY_CREATE;
 
     private SQLiteDatabase db;
@@ -63,18 +63,12 @@ public class BancoDados extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(criacaoTabelas());
-    }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-
-    }
-
-    public String criacaoTabelas(){
+        try{
 
 
-        QUERY_CREATE = "CREATE TABLE " +tblUsuarios +" ("+
+
+            String QUERY_CREATE1 = "CREATE TABLE " +tblUsuarios +" ("+
                 "codigo INTEGER PRIMARY KEY autoincrement,"+
                 usuarioNome +" TEXT,"+
                 usuarioSenha+" TEXT,"+
@@ -83,9 +77,9 @@ public class BancoDados extends SQLiteOpenHelper{
                 usuarioPontuacao+" INTEGER,"+
                 usuarioUltMissao+" INTEGER,"+
                 usuarioDinheiro+" INTEGER,"+
-                usuarioUltAcesso+" DATE )";
+                usuarioUltAcesso+" TEXT )";
 
-        QUERY_CREATE = "CREATE TABLE "+ tblPecas+ " ("+
+        String QUERY_CREATE2 = "CREATE TABLE "+ tblPecas+ " ("+
                 pecaCodigo+" TEXT PRIMARY KEY,"+
                 pecaDescricao+" TEXT,"+
                 pecaCategoria+" INTEGER,"+
@@ -94,17 +88,45 @@ public class BancoDados extends SQLiteOpenHelper{
                 pecaPropriedades+" TEXT,"+
                 pecaNivel+" INTEGER,"+
                 pecaImagem+" TEXT,"+
-                pecaCadastro+" DATE )";
+                pecaCadastro+" TEXT )";
 
-        QUERY_CREATE = "CREATE TABLE "+tblMissoes+" ("+
+         String QUERY_CREATE3 = "CREATE TABLE "+tblMissoes+" ("+
                 missaoCodigo+" TEXT PRIMARY KEY,"+
                 missaoNome+" TEXT,"+
                 missaoObjetivo+" TEXT,"+
                 missaoRegras+" TEXT,"+
-                missaoCadastro+" DATE )";
+                missaoCadastro+" TEXT )";
 
-        return QUERY_CREATE;
+        try {
+            db.execSQL(QUERY_CREATE1);
+        }catch(Exception ex){
+
+        }
+            try {
+        db.execSQL(QUERY_CREATE2);
+            }catch(Exception ex){
+
+            }
+          try {
+              db.execSQL(QUERY_CREATE3);
+          }catch(Exception ex){
+
+          }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
     }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        //Exclui as tabelas caso existir
+        db.execSQL("DROP TABLE "+tblMissoes+ " IF EXISTS");
+        db.execSQL("DROP TABLE "+tblUsuarios+ " IF EXISTS");
+        db.execSQL("DROP TABLE "+tblPecas+ " IF EXISTS");
+
+        onCreate(db);
+    }
+
 
     public Cursor selectDate(String tabela, ArrayList<String> fields){
 

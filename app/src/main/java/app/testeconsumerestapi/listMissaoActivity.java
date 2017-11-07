@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.testeconsumerestapi.models.Missao;
@@ -36,10 +37,19 @@ public class listMissaoActivity extends AppCompatActivity {
         //Carrega as missões do banco de dados
         List<Missao> missoesFromBD = new otherFunctions().carregarMissoes(this.getApplicationContext());
 
-        ArrayAdapter<Missao> arrayAdapter = new ArrayAdapter<Missao>(
+        ArrayList<String> missoes = new ArrayList<>();
+
+        for (Missao m : missoesFromBD) {
+
+            missoes.add(m.getNome() + " - "+ m.getXP().toString());
+
+        }
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(
                 this,
                 android.R.layout.simple_list_item_1,
-                missoesFromBD
+                missoes
+
         );
 
         listViewMissoes.setAdapter(arrayAdapter);

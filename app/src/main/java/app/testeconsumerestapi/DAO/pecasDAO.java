@@ -10,7 +10,9 @@ import java.util.List;
 
 import app.testeconsumerestapi.db.BancoDados;
 import app.testeconsumerestapi.models.Peca;
+import app.testeconsumerestapi.models.propriedadesPeca;
 import app.testeconsumerestapi.utils.Rest_API;
+import app.testeconsumerestapi.utils.modelToJson;
 
 /**
  * Created by Alisson on 02/10/2017.
@@ -40,6 +42,8 @@ public class pecasDAO {
 
             db = banco.getWritableDatabase();
 
+            //banco.onCreate(db);
+
             for (Peca peca : pecas) {
 
                 cv = new ContentValues();
@@ -48,7 +52,7 @@ public class pecasDAO {
                 cv.put(BancoDados.pecaCategoria, peca.getCategoria());
                 cv.put(BancoDados.pecaDescricao, peca.getDescricao());
                 cv.put(BancoDados.pecaInformacoes, peca.getInformacoes());
-                cv.put(BancoDados.pecaPropriedades, peca.getPropriedades());
+                cv.put(BancoDados.pecaPropriedades, new modelToJson().ConvertPropriedadesToJson(peca.getPropriedades()));
                 cv.put(BancoDados.pecaImagem, peca.getImagem());
                 cv.put(BancoDados.pecaNivel, peca.getNivel());
                 cv.put(BancoDados.pecaPreco, peca.getPreco());

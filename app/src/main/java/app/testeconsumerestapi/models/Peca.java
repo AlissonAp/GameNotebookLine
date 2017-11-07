@@ -17,7 +17,7 @@ public class Peca {
     private Integer categoria;
     private String  informacoes;
     private Integer preco;
-    private String  propriedades;
+    private propriedadesPeca  propriedades;
     private Integer nivel;
     private String  imagem;
     private String  dataCadastro;
@@ -62,11 +62,12 @@ public class Peca {
         this.preco = preco;
     }
 
-    public String getPropriedades() {
+
+    public propriedadesPeca getPropriedades() {
         return propriedades;
     }
 
-    public void setPropriedades(String propriedades) {
+    public void setPropriedades(propriedadesPeca propriedades) {
         this.propriedades = propriedades;
     }
 

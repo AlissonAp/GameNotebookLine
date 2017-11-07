@@ -10,7 +10,11 @@ import java.util.List;
 
 import app.testeconsumerestapi.db.BancoDados;
 import app.testeconsumerestapi.models.Missao;
+import app.testeconsumerestapi.models.regrasMissao;
 import app.testeconsumerestapi.utils.Rest_API;
+import app.testeconsumerestapi.utils.jsonToModel;
+import app.testeconsumerestapi.utils.modelToJson;
+import app.testeconsumerestapi.utils.otherFunctions;
 
 /**
  * Created by Alisson on 02/10/2017.
@@ -45,8 +49,9 @@ public class missoesDAO {
             cv.put(BancoDados.missaoCodigo,missao.getId());
             cv.put(BancoDados.missaoNome, missao.getNome());
             cv.put(BancoDados.missaoObjetivo , missao.getObjetivo());
-            cv.put(BancoDados.missaoRegras , missao.getRegras());
+            cv.put(BancoDados.missaoRegras , new modelToJson().ConvertRegrasToJson(missao.getRegras()));
             cv.put(BancoDados.missaoCadastro, missao.getDataCadastro());
+
 
             resultado = db.insert(BancoDados.tblMissoes, null, cv);
 

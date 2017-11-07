@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.testeconsumerestapi.models.Missao;
+import app.testeconsumerestapi.models.Missoes;
 import app.testeconsumerestapi.models.Peca;
+import app.testeconsumerestapi.models.Pecas;
 import app.testeconsumerestapi.models.propriedadesPeca;
 import app.testeconsumerestapi.models.regrasMissao;
 import app.testeconsumerestapi.models.request;
@@ -56,11 +58,12 @@ public class jsonToModel {
     public List<Missao> MissoesFromJSON(String JSON){
 
         Gson gson = new Gson();
-        Type type = new TypeToken<Peca>(){}.getType();
+        Type type = new TypeToken<List<Missao>>(){}.getType();
         try {
-            ArrayList<Missao> missoes  = gson.fromJson(jsonConverter(JSON),type);
+            List<Missao> missoes  = gson.fromJson(jsonConverter(JSON),type);
             return missoes;
         }catch(Exception ex){
+            System.out.println(ex);
             return new ArrayList<Missao>();
         }
     }
@@ -69,10 +72,10 @@ public class jsonToModel {
 
         Gson gson = new Gson();
 
-        Type type = new TypeToken<Peca>(){}.getType();
+        Type type = new TypeToken<List<Peca>>(){}.getType();
 
         try {
-            ArrayList<Peca> pecas  = gson.fromJson(jsonConverter(JSON), type);
+            List<Peca> pecas  = gson.fromJson(jsonConverter(JSON), type);
 
             System.out.println(pecas);
 

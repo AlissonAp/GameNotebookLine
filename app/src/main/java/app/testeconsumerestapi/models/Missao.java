@@ -8,19 +8,19 @@ import java.util.Date;
 
 public class Missao {
 
-    private String id;
+    private String _id;
     private String nome;
     private String objetivo;
     private regrasMissao regras;
     private String dataCadastro;
     private Integer XP;
 
-    public String getId() {
-        return id;
+    public String get_id() {
+        return _id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getNome() {
@@ -61,5 +61,21 @@ public class Missao {
 
     public void setXP(Integer XP) {
         this.XP = XP;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Missao missao = (Missao) o;
+
+        return _id != null ? _id.equals(missao._id) : missao._id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return _id != null ? _id.hashCode() : 0;
     }
 }

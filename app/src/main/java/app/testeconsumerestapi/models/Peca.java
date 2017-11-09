@@ -94,4 +94,20 @@ public class Peca {
     public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Peca peca = (Peca) o;
+
+        return _id != null ? _id.equals(peca._id) : peca._id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return _id != null ? _id.hashCode() : 0;
+    }
 }

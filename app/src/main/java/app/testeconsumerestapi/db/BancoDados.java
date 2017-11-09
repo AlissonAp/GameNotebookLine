@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class BancoDados extends SQLiteOpenHelper{
 
     private static final int VERSAO_BANCO = 3;
-    private static final String BANCO_CLIENTE = "bd_teste.db";
+    private static final String BANCO_CLIENTE = "bd_notebookLine.db";
     private static String QUERY_CREATE;
 
     private SQLiteDatabase db;
@@ -25,32 +25,32 @@ public class BancoDados extends SQLiteOpenHelper{
     public static final String tblMissoes      = "Missoes";
 
     //Campos Usuários
-    public static final String usuarioNome         = "nome";
-    public static final String usuarioSenha        = "senha";
-    public static final String usuarioEmail        = "email";
-    public static final String usuarioNivel        = "nivel";
-    public static final String usuarioPontuacao    = "pontuacao";
-    public static final String usuarioUltMissao    = "ultimaMissao";
-    public static final String usuarioDinheiro     = "dinheiro";
-    public static final String usuarioUltAcesso    = "ultimoAcesso";
+    public static final String usuarioNome         = "user_nome";
+    public static final String usuarioSenha        = "user_senha";
+    public static final String usuarioEmail        = "user_email";
+    public static final String usuarioNivel        = "user_nivel";
+    public static final String usuarioPontuacao    = "user_pontuacao";
+    public static final String usuarioUltMissao    = "user_ultimaMissao";
+    public static final String usuarioDinheiro     = "user_dinheiro";
+    public static final String usuarioUltAcesso    = "user_ultimoAcesso";
 
     //Campos peças
-    public static final String pecaCodigo      = "codigo";
-    public static final String pecaDescricao   = "descricao";
-    public static final String pecaCategoria   = "categoria";
-    public static final String pecaInformacoes = "informacoes";
-    public static final String pecaPreco       = "preco";
-    public static final String pecaPropriedades= "propriedades";
-    public static final String pecaNivel          = "nivel";
-    public static final String pecaImagem      = "imagem";
-    public static final String pecaCadastro    = "dataCadastro";
+    public static final String pecaCodigo      = "peca_codigo";
+    public static final String pecaDescricao   = "peca_descricao";
+    public static final String pecaCategoria   = "peca_categoria";
+    public static final String pecaInformacoes = "peca_informacoes";
+    public static final String pecaPreco       = "peca_preco";
+    public static final String pecaPropriedades= "peca_propriedades";
+    public static final String pecaNivel       = "peca_nivel";
+    public static final String pecaImagem      = "peca_imagem";
+    public static final String pecaCadastro    = "peca_datacadastro";
 
     //Campos missões
-    public static final String missaoCodigo    = "codigo";
-    public static final String missaoNome      = "nome";
-    public static final String missaoObjetivo  = "objetivo";
-    public static final String missaoRegras    = "regras";
-    public static final String missaoCadastro  = "dataCadastro";
+    public static final String missaoCodigo    = "missao_codigo";
+    public static final String missaoNome      = "missao_nome";
+    public static final String missaoObjetivo  = "missao_objetivo";
+    public static final String missaoRegras    = "missao_regras";
+    public static final String missaoCadastro  = "missao_dataCadastro";
 
 
     public static final String selectMissao    =  "SELECT * FROM "+tblMissoes+ ";";
@@ -66,9 +66,27 @@ public class BancoDados extends SQLiteOpenHelper{
 
         try{
 
+            createTables();
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        //Exclui as tabelas caso existir
+        db.execSQL("DROP TABLE "+tblMissoes+ "");
+        db.execSQL("DROP TABLE "+tblUsuarios+ "");
+        db.execSQL("DROP TABLE "+tblPecas+ "");
+
+        createTables();
+    }
 
 
-            String QUERY_CREATE1 = "CREATE TABLE " +tblUsuarios +" ("+
+    public void createTables(){
+
+        String QUERY_CREATE1 = "CREATE TABLE " +tblUsuarios +" ("+
                 "codigo INTEGER PRIMARY KEY autoincrement,"+
                 usuarioNome +" TEXT,"+
                 usuarioSenha+" TEXT,"+
@@ -90,43 +108,19 @@ public class BancoDados extends SQLiteOpenHelper{
                 pecaImagem+" TEXT,"+
                 pecaCadastro+" TEXT )";
 
-         String QUERY_CREATE3 = "CREATE TABLE "+tblMissoes+" ("+
+        String QUERY_CREATE3 = "CREATE TABLE "+tblMissoes+" ("+
                 missaoCodigo+" TEXT PRIMARY KEY,"+
                 missaoNome+" TEXT,"+
                 missaoObjetivo+" TEXT,"+
                 missaoRegras+" TEXT,"+
                 missaoCadastro+" TEXT )";
 
-        try {
-            db.execSQL(QUERY_CREATE1);
-        }catch(Exception ex){
 
-        }
-            try {
-        db.execSQL(QUERY_CREATE2);
-            }catch(Exception ex){
+                db.execSQL(QUERY_CREATE1);
+                db.execSQL(QUERY_CREATE2);
+                db.execSQL(QUERY_CREATE3);
 
-            }
-          try {
-              db.execSQL(QUERY_CREATE3);
-          }catch(Exception ex){
-
-          }
-        }catch(Exception ex){
-            System.out.println(ex);
-        }
     }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        //Exclui as tabelas caso existir
-        db.execSQL("DROP TABLE "+tblMissoes+ " IF EXISTS");
-        db.execSQL("DROP TABLE "+tblUsuarios+ " IF EXISTS");
-        db.execSQL("DROP TABLE "+tblPecas+ " IF EXISTS");
-
-        onCreate(db);
-    }
-
 
     public Cursor selectDate(String tabela, ArrayList<String> fields){
 

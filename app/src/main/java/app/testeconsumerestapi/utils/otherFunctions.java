@@ -50,6 +50,7 @@ public class otherFunctions {
 
         ArrayList<String> campos = new ArrayList<>();
 
+        campos.add(BancoDados.missaoCodigo);
         campos.add(BancoDados.missaoNome);
         campos.add(BancoDados.missaoObjetivo);
 
@@ -94,7 +95,7 @@ public class otherFunctions {
                 peca.setDescricao(c.getString(c.getColumnIndex(BancoDados.pecaDescricao)));
                 peca.setInformacoes(c.getString(c.getColumnIndex(BancoDados.pecaInformacoes)));
 
-                propriedadesPeca propsPeca = new propriedadesPeca();
+                propriedadesPeca propsPeca;
 
                 propsPeca = new jsonToModel().propriedadesPecaFromJSON(c.getString(c.getColumnIndex(BancoDados.pecaPropriedades)));
 

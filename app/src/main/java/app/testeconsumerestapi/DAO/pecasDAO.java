@@ -13,6 +13,7 @@ import app.testeconsumerestapi.models.Peca;
 import app.testeconsumerestapi.models.propriedadesPeca;
 import app.testeconsumerestapi.utils.Rest_API;
 import app.testeconsumerestapi.utils.modelToJson;
+import app.testeconsumerestapi.utils.otherFunctions;
 
 /**
  * Created by Alisson on 02/10/2017.
@@ -35,40 +36,53 @@ public class pecasDAO {
         int contaErros = 0;
 
         Rest_API pecasAPI = new Rest_API();
+
         //Busca todas as peças disponíveis na API Node
         List<Peca> pecas =  pecasAPI.buscarPecas(query,context);
 
-        try {
+        if(!pecas.isEmpty() && pecas != null) {
 
-            db = banco.getWritableDatabase();
+            List<Peca> pecasExistentes = new otherFunctions().carregarpecas(context);
 
-            //banco.onCreate(db);
+            try {
 
-            for (Peca peca : pecas) {
+                db = banco.getWritableDatabase();
 
-                cv = new ContentValues();
+                //banco.onCreate(db);
 
-                cv.put(BancoDados.pecaCodigo, peca.get_id());
-                cv.put(BancoDados.pecaCategoria, peca.getCategoria());
-                cv.put(BancoDados.pecaDescricao, peca.getDescricao());
-                cv.put(BancoDados.pecaInformacoes, peca.getInformacoes());
-                cv.put(BancoDados.pecaPropriedades, new modelToJson().ConvertPropriedadesToJson(peca.getPropriedades()));
-                cv.put(BancoDados.pecaImagem, peca.getImagem());
-                cv.put(BancoDados.pecaNivel, peca.getNivel());
-                cv.put(BancoDados.pecaPreco, peca.getPreco());
-                cv.put(BancoDados.pecaCadastro, peca.getDataCadastro());
+                for (Peca peca : pecas) {
 
-                resultado = db.insert(BancoDados.tblPecas, null, cv);
+                    //Se a peça ainda não existe no BD
+                    if (!pecasExistentes.contains(peca)) {
 
-                if (resultado == -1) {
-                    contaErros++;
+                        cv = new ContentValues();
+
+                        cv.put(BancoDados.pecaCodigo, peca.get_id());
+                        cv.put(BancoDados.pecaCategoria, peca.getCategoria());
+                        cv.put(BancoDados.pecaDescricao, peca.getDescricao());
+                        cv.put(BancoDados.pecaInformacoes, peca.getInformacoes());
+                        cv.put(BancoDados.pecaPropriedades, new modelToJson().ConvertPropriedadesToJson(peca.getPropriedades()));
+                        cv.put(BancoDados.pecaImagem, peca.getImagem());
+                        cv.put(BancoDados.pecaNivel, peca.getNivel());
+                        cv.put(BancoDados.pecaPreco, peca.getPreco());
+                        cv.put(BancoDados.pecaCadastro, peca.getDataCadastro());
+
+                        resultado = db.insert(BancoDados.tblPecas, null, cv);
+
+                        if (resultado == -1) {
+                            contaErros++;
+                        }
+                    } else { //Aqui poderá ser implementado o método update se preciso
+
+                    }
+
                 }
+
+                db.close();
+
+            } catch (Exception ex) {
+                System.out.println(ex);
             }
-
-            db.close();
-
-        }catch(Exception ex){
-            System.out.println(ex);
         }
 
         if(contaErros == 0){

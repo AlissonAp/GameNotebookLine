@@ -41,7 +41,7 @@ public class listMissaoActivity extends AppCompatActivity {
 
         for (Missao m : missoesFromBD) {
 
-            missoes.add(m.getNome() + " - "+ m.getXP().toString());
+            missoes.add(m.getNome());
 
         }
 

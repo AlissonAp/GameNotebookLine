@@ -28,6 +28,9 @@ public class loginUserActivity  extends AppCompatActivity{
         this.deleteDatabase("bd_notebookline_new");
         this.deleteDatabase("bd_notebookline");
         this.deleteDatabase("bd_notebookline2");
+        this.deleteDatabase("bd_notebookline_new.bd");
+        this.deleteDatabase("bd_notebookline.bd");
+        this.deleteDatabase("bd_notebookline2.bd");
     }
 
 

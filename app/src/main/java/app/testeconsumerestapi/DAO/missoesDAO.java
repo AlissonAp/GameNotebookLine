@@ -37,37 +37,49 @@ public class missoesDAO {
         int contaErros = 0;
 
         Rest_API pecasAPI = new Rest_API();
+
         //Busca todas as peças disponíveis na API Node
         List<Missao> missoes =  pecasAPI.buscarMissoes(query,context);
 
-        db = banco.getWritableDatabase();
+        if(!missoes.isEmpty() && missoes != null) {
 
-        for(Missao missao : missoes){
+            //Carrega missoes já existentes no bd
+            List<Missao> missoesExistentes = new otherFunctions().carregarMissoes(context);
 
-            cv = new ContentValues();
+            db = banco.getWritableDatabase();
 
-            cv.put(BancoDados.missaoCodigo,missao.getId());
-            cv.put(BancoDados.missaoNome, missao.getNome());
-            cv.put(BancoDados.missaoObjetivo , missao.getObjetivo());
-            cv.put(BancoDados.missaoRegras , new modelToJson().ConvertRegrasToJson(missao.getRegras()));
-            cv.put(BancoDados.missaoCadastro, missao.getDataCadastro());
+            for (Missao missao : missoes) {
+
+                //Insere somente as missões que ainda não estão no BD
+                if (!missoesExistentes.contains(missao)) {
+
+                    cv = new ContentValues();
+
+                    cv.put(BancoDados.missaoCodigo, missao.get_id());
+                    cv.put(BancoDados.missaoNome, missao.getNome());
+                    cv.put(BancoDados.missaoObjetivo, missao.getObjetivo());
+                    cv.put(BancoDados.missaoRegras, new modelToJson().ConvertRegrasToJson(missao.getRegras()));
+                    cv.put(BancoDados.missaoCadastro, missao.getDataCadastro());
 
 
-            resultado = db.insert(BancoDados.tblMissoes, null, cv);
+                    resultado = db.insert(BancoDados.tblMissoes, null, cv);
 
-            if (resultado ==-1) {
-                contaErros++;
+                    if (resultado == -1) {
+                        contaErros++;
+                    }
+
+                }
+
             }
 
+            db.close();
         }
 
-        db.close();
-
-        if(contaErros == 0){
-            return true;
-        }else{
-            return false;
-        }
+            if (contaErros == 0) {
+                return true;
+            } else {
+                return false;
+            }
 
     }
 

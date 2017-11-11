@@ -60,7 +60,7 @@ public class missoesDAO {
                     cv.put(BancoDados.missaoObjetivo, missao.getObjetivo());
                     cv.put(BancoDados.missaoRegras, new modelToJson().ConvertRegrasToJson(missao.getRegras()));
                     cv.put(BancoDados.missaoCadastro, missao.getDataCadastro());
-
+                    cv.put(BancoDados.missaoXP, missao.getXP());
 
                     resultado = db.insert(BancoDados.tblMissoes, null, cv);
 

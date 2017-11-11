@@ -7,9 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import app.testeconsumerestapi.models.request;
 import app.testeconsumerestapi.utils.otherFunctions;
 import app.testeconsumerestapi.utils.userFunctions;
+import okhttp3.OkHttpClient;
 
 
 /**
@@ -25,12 +29,16 @@ public class loginUserActivity  extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
-        this.deleteDatabase("bd_notebookline_new");
-        this.deleteDatabase("bd_notebookline");
-        this.deleteDatabase("bd_notebookline2");
-        this.deleteDatabase("bd_notebookline_new.bd");
-        this.deleteDatabase("bd_notebookline.bd");
-        this.deleteDatabase("bd_notebookline2.bd");
+
+
+
+        email = (EditText) findViewById(R.id.txtEmail);
+        senha = (EditText) findViewById(R.id.txtSenha);
+
+        email.setText("aaphardware@gmail.com");
+        senha.setText("1234");
+
+
     }
 
 

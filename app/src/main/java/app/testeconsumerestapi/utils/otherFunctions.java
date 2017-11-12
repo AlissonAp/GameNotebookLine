@@ -72,6 +72,7 @@ public class otherFunctions {
             return missoes;
 
         }catch (Exception ex){
+            System.out.println("Excessao");
             return new ArrayList<Missao>();
         }
 

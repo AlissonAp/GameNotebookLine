@@ -144,12 +144,17 @@ public class BancoDados extends SQLiteOpenHelper{
         }
 
         db = this.getReadableDatabase();
-        cursor = db.query(tabela, campos, null, null, null, null, null, null);
+try {
+    cursor = db.query(tabela, campos, null, null, null, null, null, null);
 
-        if(cursor!=null){
-            cursor.moveToFirst();
-        }
-        db.close();
+    if (cursor != null) {
+        cursor.moveToFirst();
+    }
+
+
+}catch (Exception ex){
+    return null;
+}       db.close();
         return cursor;
 
     }

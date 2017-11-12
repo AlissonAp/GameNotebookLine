@@ -110,7 +110,10 @@ public class missoesAdapter extends BaseAdapter implements View.OnClickListener 
 
             holder.nome.setText(missao.getNome());
             holder.informacoes.setText(missao.getObjetivo());
-            holder.xp.setText(missao.getXP());
+
+            if(missao.getXP() != null) {
+            holder.xp.setText(missao.getXP().toString());
+        }
 
             /******** Set Item Click Listner for LayoutInflater for each row *******/
 

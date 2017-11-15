@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -116,5 +119,15 @@ public class otherFunctions {
         }
 
     }
+
+    public Bitmap base64ToBitmap(String base64Image){
+
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        return decodedByte;
+
+    }
+
 
 }

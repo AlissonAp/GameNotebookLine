@@ -1,87 +1,98 @@
 package app.testeconsumerestapi.utils;
 
-import android.app.Activity;
+
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.List;
 
 import app.testeconsumerestapi.R;
-import app.testeconsumerestapi.models.Missao;
 import app.testeconsumerestapi.models.Peca;
 
 /**
  * Created by Alisson on 09/11/2017.
  */
 
-/********* Adapter class extends with BaseAdapter and implements with OnClickListener ************/
-public class pecasAdapter {
+public class pecasAdapter extends RecyclerView.Adapter<pecasAdapter.ViewHolder> {
 
-    /*********** Declare Used Variables *********/
-    private Activity activity;
-    private List<Peca> data;
-    private static LayoutInflater inflater=null;
-    public Resources res;
-    Missao missao = null;
-    int i=0;
+    private List<Peca> pecas = Collections.emptyList();
+    private LayoutInflater mInflater;
+    private ItemClickListener mClickListener;
 
-    /*************  CustomAdapter Constructor *****************/
-    public pecasAdapter(Activity a, List<Peca> d, Resources resLocal) {
+    // data is passed into the constructor
+    public pecasAdapter(Context context, List<Peca> pecas) {
+        this.mInflater = LayoutInflater.from(context);
+        this.pecas = pecas;
+    }
 
-        /********** Take passed values **********/
-        activity = a;
-        data=d;
-        res = resLocal;
+    // inflates the row layout from xml when needed
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.layout_item_pecas, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
+    }
 
-        /***********  Layout inflator to call external xml layout () ***********/
-        inflater = ( LayoutInflater )activity.
-                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    // binds the data to the view and textview in each row
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        String imageBASE64      = pecas.get(position).getImagem();
+        String descricaoPeca    = pecas.get(position).getDescricao();
+        String valorPeca        = pecas.get(position).getPreco().toString();
+
+        Bitmap btmImage = new otherFunctions().base64ToBitmap(imageBASE64);
+
+        holder.imagemPeca.setImageBitmap(btmImage);
+        holder.nomePeca.setText(descricaoPeca);
+        holder.valorPeca.setText(valorPeca);
 
     }
 
-    public void createLayoutInflater(){
+    // total number of rows
+    @Override
+    public int getItemCount() {
+        return pecas.size();
+    }
 
-    //create LayoutInflator class
-    LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    // stores and recycles views as they are scrolled off screen
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public ImageView imagemPeca;
+        public TextView  nomePeca;
+        public TextView  valorPeca;
 
-    int size = data.size();
-
-    for (int i = 0; i < size; i++) {
-
-        Peca peca = data.get(i);
-
-        // create dynamic LinearLayout and set Image on it.
-
-        if (peca != null) {
-
-            LinearLayout clickableColumn = (LinearLayout) inflater.inflate(
-
-                    R.layout.clickable_column, null);
-
-            ImageView thumbnailImage = (ImageView) clickableColumn
-
-                    .findViewById(R.id.thumbnail_image);
-
-            TextView Nome = (TextView) clickableColumn
-
-                    .findViewById(R.id.txt_NomePeca);
-
-            Nome.setText(peca.getDescricao());
-
-            byte[] decodedString = Base64.decode(peca.getImagem(), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,decodedString.length);
-
-            thumbnailImage.setImageBitmap(decodedByte);
+        public ViewHolder(View itemView) {
+            super(itemView);
+            imagemPeca  = itemView.findViewById(R.id.imagemPeca);
+            nomePeca    = itemView.findViewById(R.id.txtNomePeca);
+            valorPeca   = itemView.findViewById(R.id.txtValorPeca);
+            itemView.setOnClickListener(this);
         }
-}}}
+
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+        }
+    }
+
+    // convenience method for getting data at click position
+    public Peca getItem(int id) {
+        return pecas.get(id);
+    }
+
+    // allows clicks events to be caught
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    // parent activity will implement this method to respond to click events
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
+}

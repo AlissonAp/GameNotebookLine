@@ -28,7 +28,9 @@
 
         </activity>
 
-        <activity android:name=".listMissaoActivity"></activity>
+        <activity android:name=".listMissaoActivity">
+
+        </activity>
     </application>
 
 </manifest>

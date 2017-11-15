@@ -4,6 +4,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -16,26 +20,30 @@ import app.testeconsumerestapi.utils.pecasAdapter;
  */
 
 public class listPecasActivity extends AppCompatActivity{
+
+    private pecasAdapter adapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment);
+        setContentView(R.layout.layout_main_pecas);
+
+        // set up the RecyclerView
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvPecas);
+        LinearLayoutManager horizontalLayoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+
+        //Busca pecas do Banco
+
+        List<Peca> pecas = new otherFunctions().carregarpecas(this);
+
+        adapter = new pecasAdapter(this,pecas);
+
+        recyclerView.setAdapter(adapter);
 
     }
 
-    public void carregarPecas(){
-
-        otherFunctions function = new otherFunctions();
-
-        List<Peca> pecas = function.carregarpecas(this);
-
-        Resources rs = getResources();
-
-        pecasAdapter adapter = new pecasAdapter(this,pecas,rs);
-
-
-
-    }
 
 
 }

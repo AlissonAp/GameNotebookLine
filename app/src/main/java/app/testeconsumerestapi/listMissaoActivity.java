@@ -13,6 +13,7 @@ import java.util.List;
 import app.testeconsumerestapi.models.Missao;
 import app.testeconsumerestapi.utils.missoesAdapter;
 import app.testeconsumerestapi.utils.otherFunctions;
+import app.testeconsumerestapi.utils.userFunctions;
 
 /**
  * Created by Alisson on 03/11/2017.
@@ -25,10 +26,20 @@ public class listMissaoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_list_missoes);
 
-        PopulateMissoes();
+       try {
+
+           super.onCreate(savedInstanceState);
+           setContentView(R.layout.layout_list_missoes);
+
+           PopulateMissoes();
+
+       }catch(Exception ex){
+
+           System.out.println("Excessao");
+            new userFunctions().enviarNotificacao(this, ex.toString());
+
+       }
     }
 
     public void PopulateMissoes(){

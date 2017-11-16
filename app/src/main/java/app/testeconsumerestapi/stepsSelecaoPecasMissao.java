@@ -19,7 +19,7 @@ import app.testeconsumerestapi.utils.pecasAdapter;
  * Created by Alisson on 11/11/2017.
  */
 
-public class listPecasActivity extends AppCompatActivity{
+public class stepsSelecaoPecasMissao extends AppCompatActivity{
 
     private pecasAdapter adapter;
 
@@ -44,6 +44,14 @@ public class listPecasActivity extends AppCompatActivity{
 
     }
 
+
+
+    public void inicializaEtapas(){
+
+
+
+
+    }
 
 
 }

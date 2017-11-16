@@ -2,11 +2,13 @@ package app.testeconsumerestapi.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.view.View;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ import app.testeconsumerestapi.db.BancoDados;
 import app.testeconsumerestapi.models.Missao;
 import app.testeconsumerestapi.models.Peca;
 import app.testeconsumerestapi.models.propriedadesPeca;
+import app.testeconsumerestapi.models.regrasMissao;
+import app.testeconsumerestapi.stepsSelecaoPecasMissao;
 
 /**
  * Created by Alisson on 01/11/2017.
@@ -56,6 +60,8 @@ public class otherFunctions {
         campos.add(BancoDados.missaoCodigo);
         campos.add(BancoDados.missaoNome);
         campos.add(BancoDados.missaoObjetivo);
+        campos.add(BancoDados.missaoXP);
+        campos.add(BancoDados.missaoRegras);
 
         Cursor c = new missoesDAO(contexto).loadMissoes(campos);
 
@@ -68,6 +74,14 @@ public class otherFunctions {
 
                 missao.setNome(c.getString(c.getColumnIndex(BancoDados.missaoNome)));
                 missao.setObjetivo(c.getString(c.getColumnIndex(BancoDados.missaoObjetivo)));
+                missao.set_id(c.getString(c.getColumnIndex(BancoDados.missaoCodigo)));
+                missao.setXP(c.getInt(c.getColumnIndex(BancoDados.missaoXP)));
+
+                regrasMissao regras = new regrasMissao();
+
+                regras = new jsonToModel().regrasMissaoFromJSON(c.getString(c.getColumnIndex(BancoDados.missaoRegras)));
+
+                missao.setRegras(regras);
 
                 missoes.add(missao);
             }
@@ -128,6 +142,8 @@ public class otherFunctions {
         return decodedByte;
 
     }
+
+
 
 
 }

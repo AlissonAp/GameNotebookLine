@@ -11,9 +11,10 @@ public class Missao {
     private String _id;
     private String nome;
     private String objetivo;
+    private Integer XP;
     private regrasMissao regras;
     private String dataCadastro;
-    private Integer XP;
+
 
     public String get_id() {
         return _id;

@@ -87,6 +87,21 @@ public class jsonToModel {
         }
     }
 
+    public Missao MissaoFromJson(String JSON){
+
+        Gson gson = new Gson();
+
+        try {
+            Missao missao = gson.fromJson(jsonConverter(JSON), Missao.class);
+
+            return missao;
+        }catch(Exception ex){
+
+           return null;
+
+        }
+    }
+
     public JsonElement jsonConverter(String JSON){
 
         try{

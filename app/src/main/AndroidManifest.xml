@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".listPecasActivity">
+        <activity android:name=".initialPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,6 +31,13 @@
         <activity android:name=".listMissaoActivity">
 
         </activity>
+
+        <activity android:name=".startMissao">
+
+        </activity>
+
+        <activity android:name=".stepsSelecaoPecasMissao" ></activity>
+
     </application>
 
 </manifest>

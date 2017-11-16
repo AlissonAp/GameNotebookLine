@@ -2,6 +2,8 @@ package app.testeconsumerestapi.utils;
 
 import com.google.gson.Gson;
 
+import app.testeconsumerestapi.models.Missao;
+import app.testeconsumerestapi.models.Peca;
 import app.testeconsumerestapi.models.Usuario;
 import app.testeconsumerestapi.models.propriedadesPeca;
 import app.testeconsumerestapi.models.regrasMissao;
@@ -38,6 +40,21 @@ public class modelToJson {
         return json;
     }
 
+    public String ConvertMissaoToJson(Missao missao){
 
+        Gson gson = new Gson();
+        String json = gson.toJson(missao);
+
+        return json;
+    }
+
+
+    public String ConvertPecaToJson(Peca peca){
+
+        Gson gson = new Gson();
+        String json = gson.toJson(peca);
+
+        return json;
+    }
 
 }

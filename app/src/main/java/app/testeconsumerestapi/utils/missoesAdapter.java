@@ -2,7 +2,9 @@ package app.testeconsumerestapi.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,8 @@ import java.util.List;
 
 import app.testeconsumerestapi.R;
 import app.testeconsumerestapi.models.Missao;
+import app.testeconsumerestapi.startMissao;
+import app.testeconsumerestapi.stepsSelecaoPecasMissao;
 
 /**
  * Created by Alisson on 09/11/2017.
@@ -136,10 +140,27 @@ public class missoesAdapter extends BaseAdapter implements View.OnClickListener 
         }
 
         @Override
-        public void onClick(View arg0) {
+        public void onClick(View view) {
 
-           //Método chamado no clique do dedo
+            try {
 
+                    String dadosMissaoBundle;
+
+                    Intent CreateUserScreen = new Intent(view.getContext(), startMissao.class);
+
+                    //Get information of clicked object
+                    missao = data.get(mPosition);
+
+                    dadosMissaoBundle = new modelToJson().ConvertMissaoToJson(missao);
+
+                    CreateUserScreen.putExtra("parameters", dadosMissaoBundle);
+
+                    //Start activity
+                    view.getContext().startActivity(CreateUserScreen);
+
+            }catch (Exception ex){
+                new userFunctions().enviarNotificacao(view.getContext(),ex.toString());
+            }
         }
     }
 }

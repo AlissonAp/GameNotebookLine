@@ -9,6 +9,7 @@ import android.view.View;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
+import app.testeconsumerestapi.utils.userFunctions;
 import okhttp3.OkHttpClient;
 
 
@@ -20,17 +21,25 @@ public class initialPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_principal);
-
-        Stetho.initializeWithDefaults(this);
-
-        OkHttpClient client = new OkHttpClient();
 
 
-        client.newBuilder().addInterceptor(new StethoInterceptor()).build();
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.layout_principal);
 
-       // client.networkInterceptors().add();
+            Stetho.initializeWithDefaults(this);
+
+            OkHttpClient client = new OkHttpClient();
+
+
+            client.newBuilder().addInterceptor(new StethoInterceptor()).build();
+
+            // client.networkInterceptors().add();
+
+        }catch (Exception ex){
+
+            new userFunctions().enviarNotificacao(this, ex.toString());
+        }
 
     }
 

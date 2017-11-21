@@ -6,92 +6,92 @@ package app.testeconsumerestapi.models;
 
 public class regrasMissao {
 
-    private Number regraGbMemoriaRam;		 // Medida em GB
-    private Number regraGbPlacaVideo;               // Medida em GB
-    private Number regraGbArmazenamento;            // Medida em GB
-    private Number regraMhzMemoriaRam;            // Medida em Mhz
-    private Number regraGhzProcessador;             // Medida em Ghz
-    private Number regraGhzPlacaVideo;             // Medida em Ghz
-    private Number regraRpmLeituraEscrita;	         // Medida em RPM
-    private Number regraNucleosProcessador;
+    private int regraGbMemoriaRam;		 // Medida em GB
+    private int regraGbPlacaVideo;               // Medida em GB
+    private int regraGbArmazenamento;            // Medida em GB
+    private int regraMhzMemoriaRam;            // Medida em Mhz
+    private int regraGhzProcessador;             // Medida em Ghz
+    private int regraGhzPlacaVideo;             // Medida em Ghz
+    private int regraRpmLeituraEscrita;	         // Medida em RPM
+    private int regraNucleosProcessador;
     private String regraModeloProcessador;         // Pentiun, i3, i5, i7, amdfx
-    private Number regraBitsPlacaVideo;          // Medida em Bits , ex: 128 bits, 254 bits
-    private Number regracacheProcessador;           // Medida em MB
-    private Number regracacheArmazenamento;         // Medida em MB
-    private Number regraMahBateria;         // Medida em miliAmperes, Ex 2800mah
+    private int regraBitsPlacaVideo;          // Medida em Bits , ex: 128 bits, 254 bits
+    private int regracacheProcessador;           // Medida em MB
+    private int regracacheArmazenamento;         // Medida em MB
+    private int regraMahBateria;         // Medida em miliAmperes, Ex 2800mah
     private String regraTipoTela;                 // LCD, LED, TOUCH
-    private Number regraTamanhoTela;                // 10, 14, 15, 15.6, 17 em polegadas
-    private Number regraCelulasBateria;
-    private Number regraConexoesUSB;
+    private int regraTamanhoTela;                // 10, 14, 15, 15.6, 17 em polegadas
+    private int regraCelulasBateria;
+    private int regraConexoesUSB;
     private String regraPossuiBluetooth;            //S ou N
     private String regraPossuiWebCam;            //S ou N
     private String regraPossuiLeitorCd_Dvd;         //S ou N
     private String regraResistenciaCarcaca;	     // Fraca, Média, Forte
-    private Number regraPesoCarcaca;	     // Medida em gramas
+    private int regraPesoCarcaca;	     // Medida em gramas
     private String regraPossuiEntradaHDMI;          // S ou N
     private String regraSistemaOperacional;
 
-    public Number getRegraGbMemoriaRam() {
+    public int getRegraGbMemoriaRam() {
         return regraGbMemoriaRam;
     }
 
-    public void setRegraGbMemoriaRam(Number regraGbMemoriaRam) {
+    public void setRegraGbMemoriaRam(int regraGbMemoriaRam) {
         this.regraGbMemoriaRam = regraGbMemoriaRam;
     }
 
-    public Number getRegraGbPlacaVideo() {
+    public int getRegraGbPlacaVideo() {
         return regraGbPlacaVideo;
     }
 
-    public void setRegraGbPlacaVideo(Number regraGbPlacaVideo) {
+    public void setRegraGbPlacaVideo(int regraGbPlacaVideo) {
         this.regraGbPlacaVideo = regraGbPlacaVideo;
     }
 
-    public Number getRegraGbArmazenamento() {
+    public int getRegraGbArmazenamento() {
         return regraGbArmazenamento;
     }
 
-    public void setRegraGbArmazenamento(Number regraGbArmazenamento) {
+    public void setRegraGbArmazenamento(int regraGbArmazenamento) {
         this.regraGbArmazenamento = regraGbArmazenamento;
     }
 
-    public Number getRegraMhzMemoriaRam() {
+    public int getRegraMhzMemoriaRam() {
         return regraMhzMemoriaRam;
     }
 
-    public void setRegraMhzMemoriaRam(Number regraMhzMemoriaRam) {
+    public void setRegraMhzMemoriaRam(int regraMhzMemoriaRam) {
         this.regraMhzMemoriaRam = regraMhzMemoriaRam;
     }
 
-    public Number getRegraGhzProcessador() {
+    public int getRegraGhzProcessador() {
         return regraGhzProcessador;
     }
 
-    public void setRegraGhzProcessador(Number regraGhzProcessador) {
+    public void setRegraGhzProcessador(int regraGhzProcessador) {
         this.regraGhzProcessador = regraGhzProcessador;
     }
 
-    public Number getRegraGhzPlacaVideo() {
+    public int getRegraGhzPlacaVideo() {
         return regraGhzPlacaVideo;
     }
 
-    public void setRegraGhzPlacaVideo(Number regraGhzPlacaVideo) {
+    public void setRegraGhzPlacaVideo(int regraGhzPlacaVideo) {
         this.regraGhzPlacaVideo = regraGhzPlacaVideo;
     }
 
-    public Number getRegraRpmLeituraEscrita() {
+    public int getRegraRpmLeituraEscrita() {
         return regraRpmLeituraEscrita;
     }
 
-    public void setRegraRpmLeituraEscrita(Number regraRpmLeituraEscrita) {
+    public void setRegraRpmLeituraEscrita(int regraRpmLeituraEscrita) {
         this.regraRpmLeituraEscrita = regraRpmLeituraEscrita;
     }
 
-    public Number getRegraNucleosProcessador() {
+    public int getRegraNucleosProcessador() {
         return regraNucleosProcessador;
     }
 
-    public void setRegraNucleosProcessador(Number regraNucleosProcessador) {
+    public void setRegraNucleosProcessador(int regraNucleosProcessador) {
         this.regraNucleosProcessador = regraNucleosProcessador;
     }
 
@@ -103,35 +103,35 @@ public class regrasMissao {
         this.regraModeloProcessador = regraModeloProcessador;
     }
 
-    public Number getRegraBitsPlacaVideo() {
+    public int getRegraBitsPlacaVideo() {
         return regraBitsPlacaVideo;
     }
 
-    public void setRegraBitsPlacaVideo(Number regraBitsPlacaVideo) {
+    public void setRegraBitsPlacaVideo(int regraBitsPlacaVideo) {
         this.regraBitsPlacaVideo = regraBitsPlacaVideo;
     }
 
-    public Number getRegracacheProcessador() {
+    public int getRegracacheProcessador() {
         return regracacheProcessador;
     }
 
-    public void setRegracacheProcessador(Number regracacheProcessador) {
+    public void setRegracacheProcessador(int regracacheProcessador) {
         this.regracacheProcessador = regracacheProcessador;
     }
 
-    public Number getRegracacheArmazenamento() {
+    public int getRegracacheArmazenamento() {
         return regracacheArmazenamento;
     }
 
-    public void setRegracacheArmazenamento(Number regracacheArmazenamento) {
+    public void setRegracacheArmazenamento(int regracacheArmazenamento) {
         this.regracacheArmazenamento = regracacheArmazenamento;
     }
 
-    public Number getRegraMahBateria() {
+    public int getRegraMahBateria() {
         return regraMahBateria;
     }
 
-    public void setRegraMahBateria(Number regraMahBateria) {
+    public void setRegraMahBateria(int regraMahBateria) {
         this.regraMahBateria = regraMahBateria;
     }
 
@@ -143,27 +143,27 @@ public class regrasMissao {
         this.regraTipoTela = regraTipoTela;
     }
 
-    public Number getRegraTamanhoTela() {
+    public int getRegraTamanhoTela() {
         return regraTamanhoTela;
     }
 
-    public void setRegraTamanhoTela(Number regraTamanhoTela) {
+    public void setRegraTamanhoTela(int regraTamanhoTela) {
         this.regraTamanhoTela = regraTamanhoTela;
     }
 
-    public Number getRegraCelulasBateria() {
+    public int getRegraCelulasBateria() {
         return regraCelulasBateria;
     }
 
-    public void setRegraCelulasBateria(Number regraCelulasBateria) {
+    public void setRegraCelulasBateria(int regraCelulasBateria) {
         this.regraCelulasBateria = regraCelulasBateria;
     }
 
-    public Number getRegraConexoesUSB() {
+    public int getRegraConexoesUSB() {
         return regraConexoesUSB;
     }
 
-    public void setRegraConexoesUSB(Number regraConexoesUSB) {
+    public void setRegraConexoesUSB(int regraConexoesUSB) {
         this.regraConexoesUSB = regraConexoesUSB;
     }
 
@@ -199,11 +199,11 @@ public class regrasMissao {
         this.regraResistenciaCarcaca = regraResistenciaCarcaca;
     }
 
-    public Number getRegraPesoCarcaca() {
+    public int getRegraPesoCarcaca() {
         return regraPesoCarcaca;
     }
 
-    public void setRegraPesoCarcaca(Number regraPesoCarcaca) {
+    public void setRegraPesoCarcaca(int regraPesoCarcaca) {
         this.regraPesoCarcaca = regraPesoCarcaca;
     }
 

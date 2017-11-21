@@ -1,6 +1,7 @@
 package app.testeconsumerestapi.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -65,6 +66,50 @@ public class userFunctions {
         return api_communication.Login(usuario,contexto);
 
     }
+
+    public void SetUserSection(Context context, String contentSession){
+
+        // Start user session
+        SharedPreferences sharedPreferences = context.getSharedPreferences(info_sharedPreferences.UserPreferences, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //Set the user info in the session
+        editor.putString(info_sharedPreferences.JsonInfoUser,contentSession);
+
+        editor.commit();
+
+    }
+
+    public Usuario GetUserSection(Context context){
+
+        // Instantiate the sharedPreferences session
+        SharedPreferences sharedPreferences = context.getSharedPreferences(info_sharedPreferences.UserPreferences, Context.MODE_PRIVATE);
+
+        //get information in the session
+        String JsonUser = sharedPreferences.getString(info_sharedPreferences.JsonInfoUser,"");
+
+        //return the user model
+        if(!JsonUser.isEmpty()) {
+            return new jsonToModel().UsuarioFromJson(JsonUser);
+        }else{
+            return new Usuario();
+        }
+    }
+
+    public void Logout(Context context){
+
+        // Start user session
+        SharedPreferences sharedPreferences = context.getSharedPreferences(info_sharedPreferences.UserPreferences, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //Delete user session if exists
+        editor.clear();
+
+    }
+
+
 
 
 

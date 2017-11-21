@@ -1,6 +1,8 @@
 package app.testeconsumerestapi;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +12,10 @@ import android.widget.EditText;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
+import app.testeconsumerestapi.models.Usuario;
 import app.testeconsumerestapi.models.request;
+import app.testeconsumerestapi.utils.info_sharedPreferences;
+import app.testeconsumerestapi.utils.jsonToModel;
 import app.testeconsumerestapi.utils.otherFunctions;
 import app.testeconsumerestapi.utils.userFunctions;
 import okhttp3.OkHttpClient;
@@ -25,11 +30,12 @@ public class loginUserActivity  extends AppCompatActivity{
     EditText email;
     EditText senha;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
-
 
 
         email = (EditText) findViewById(R.id.txtEmail);
@@ -37,7 +43,6 @@ public class loginUserActivity  extends AppCompatActivity{
 
         email.setText("aaphardware@gmail.com");
         senha.setText("1234");
-
 
     }
 
@@ -51,23 +56,30 @@ public class loginUserActivity  extends AppCompatActivity{
 
         userFunctions function = new userFunctions();
 
-
         if(!email.getText().toString().isEmpty() && !senha.getText().toString().isEmpty()) {
 
             request retornoAPI = function.FazerLogin(email, senha, view.getContext());
 
             if (retornoAPI.status != 500) {
-                retorno = retornoAPI.msg;
 
-                if (retornoAPI.ok == true) { //Se entrou aqui pode seguir adiante, o usuário foi validado com sucesso
-                    //Carrega dados de missoes e peças para salvar localmente
-                    new otherFunctions().LoadData(view.getContext());
+                if (retornoAPI.ok == true) { //user validate success
 
-                    //Aqui vai dimensionar para a tela de listagem das missoes
-                    Intent missoesScreen = new Intent(this, listMissaoActivity.class);
+                    retorno = "Usuário validado com sucesso!";
 
-                    startActivity(missoesScreen);
+                    if(!retornoAPI.msg.isEmpty()) {
 
+                        //Load mission date
+                        new otherFunctions().LoadData(view.getContext());
+
+                        // Start user session
+                        new userFunctions().SetUserSection(this, retornoAPI.msg);
+
+                        //redirect to next screen
+                        Intent missoesScreen = new Intent(this, listMissaoActivity.class);
+
+                        startActivity(missoesScreen);
+
+                    }
                 } else {
                     retorno = retornoAPI.msg;
                 }

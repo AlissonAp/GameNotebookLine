@@ -3,10 +3,12 @@ package app.testeconsumerestapi.utils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PixelFormat;
 import android.util.Base64;
 import android.view.View;
 
@@ -19,8 +21,10 @@ import java.util.regex.Pattern;
 
 import app.testeconsumerestapi.DAO.missoesDAO;
 import app.testeconsumerestapi.DAO.pecasDAO;
+import app.testeconsumerestapi.Enumerations.categoriasPeca;
 import app.testeconsumerestapi.Rest_Consummer.comunicaWSRest;
 import app.testeconsumerestapi.db.BancoDados;
+import app.testeconsumerestapi.models.EscolhasMissao;
 import app.testeconsumerestapi.models.Missao;
 import app.testeconsumerestapi.models.Peca;
 import app.testeconsumerestapi.models.propriedadesPeca;
@@ -95,11 +99,18 @@ public class otherFunctions {
 
     }
 
-    public List<Peca> carregarpecas(Context contexto){
+    public List<Peca> carregarpecas(Context contexto, categoriasPeca categoria){
 
         BancoDados bd = new BancoDados(contexto);
 
-        Cursor c = bd.getReadableDatabase().rawQuery(BancoDados.selectPeca,null);
+        String sql = BancoDados.selectPeca;
+
+        //if the category passed to parameter then filter specified
+        if(categoria != null){
+            sql += " Where "+BancoDados.pecaCategoria+ " = "+categoria.toString().trim();
+        }
+
+        Cursor c = bd.getReadableDatabase().rawQuery(sql,null);
 
         List<Peca> pecas = new ArrayList<>();
 
@@ -143,7 +154,126 @@ public class otherFunctions {
 
     }
 
+    public ArrayList<String> validateMissao(EscolhasMissao escolhasMissao, Missao missao){
 
+
+        ArrayList<String> falhas = new ArrayList<>();
+
+        for (Peca p : escolhasMissao.getPecas()){
+
+            //convert category to enumeration
+            switch (p.getCategoria()){
+
+                case 1: //Carcaça
+                    
+                    if(p.getPropriedades().getPesoCarcaca() != 0 && missao.getRegras().getRegraPesoCarcaca() != 0) {
+
+                        if (p.getPropriedades().getPesoCarcaca() > missao.getRegras().getRegraPesoCarcaca()) {
+                            falhas.add("O peso da carcaça escolhido é superior ao permitido");
+                        }
+
+                        if (p.getPropriedades().getResistenciaCarcaca().indexOf("Fraca") > 0) {
+                            if (missao.getRegras().getRegraResistenciaCarcaca().indexOf("Média") > 0 || missao.getRegras().getRegraResistenciaCarcaca().indexOf("Forte") > 0) {
+                                falhas.add("A carcaça que você escolheu é muita fraca");
+                            }
+
+                        }
+                    }
+                    break;
+
+                case 2: //PlacaMae
+                    
+                    if(p.getPropriedades().getConexoesUSB() < missao.getRegras().getRegraConexoesUSB()){
+                        falhas.add("Eram necessárias no mínimo "+missao.getRegras().getRegraConexoesUSB() + "conexões usb");
+                    }
+
+                    break;
+
+                case 3: // Armazenamento
+
+                    if(p.getPropriedades().getCacheArmazenamento() < missao.getRegras().getRegracacheArmazenamento()){
+                        falhas.add("O cache do componente de armazenamento deve ser superior a "+missao.getRegras().getRegracacheArmazenamento() + "MB");
+                    }
+
+                    if(p.getPropriedades().getGbArmazenamento() < missao.getRegras().getRegraGbArmazenamento()){
+                        falhas.add("A quantidade de armazenamento em disco escolhida é inferior ao mínimo necessário");
+                    }
+
+
+                    break;
+
+                case 4: //Processador
+
+                    if(p.getPropriedades().getCacheProcessador() < missao.getRegras().getRegracacheProcessador()){
+                        falhas.add("O cache do processador é inferior ao mínimo necessário");
+                    }
+
+                    String modProcessador       = p.getPropriedades().getModeloProcessador();
+                    String regramodProcessador  = missao.getRegras().getRegraModeloProcessador();
+
+                    if(modProcessador.indexOf("I5") > 0 || modProcessador.indexOf("I7") > 0 || modProcessador.indexOf("FX") > 0 || modProcessador.indexOf("Ryzen") > 0){
+                        if(regramodProcessador.indexOf("I3") > 0 || regramodProcessador.indexOf("CELERON") > 0 || regramodProcessador.indexOf("PENTIUM") > 0) {
+                            falhas.add("O modelo do processador não é suficiente para dar conta da configuração solicitada na missão");
+                        }
+                    }
+
+                    if(p.getPropriedades().getGhzProcessador() < missao.getRegras().getRegraGhzProcessador()){
+                        falhas.add("A velocidade em GHz do processador não é suficiente para rodar a configuração solicitada na missão");
+                    }
+
+                    if(p.getPropriedades().getNucleosProcessador() < missao.getRegras().getRegraNucleosProcessador()) {
+                        falhas.add("A quantidade de nucleos do processos é inferior ao mínimo necessário");
+                    }
+
+                    break;
+
+                case 5: // Memória
+
+                    if(p.getPropriedades().getGbMemoriaRam() < missao.getRegras().getRegraGbMemoriaRam()){
+                        falhas.add("A quantidade de memória Ram escolhida não é suficiente para rodar a configuração solicitada");
+                    }
+
+                    if(p.getPropriedades().getMhzMemoriaRam() < missao.getRegras().getRegraMhzMemoriaRam()){
+                        falhas.add("A velocidade em Mhz da memória ram não é suficiente para rodar a configuração solicitada");
+                    }
+
+                    break;
+
+                case 6: // Wireless
+                    
+
+                    break;
+
+                case 7: // Bateria
+                    
+                    if(p.getPropriedades().getCelulasBateria() < missao.getRegras().getRegraCelulasBateria()){
+                        falhas.add("A potência da bateria não é suficiente para rodar a configuração solicitada");
+                    }
+                    
+                    break;
+
+                case 8: //Periféricos
+
+                    break;
+
+                case 9: //Tela
+                    
+                    if(p.getPropriedades().getTamanhoTela() < missao.getRegras().getRegraTamanhoTela()) {
+                        falhas.add("O tamanho da tela não é suficiente para a configuração solicitada pela missão");
+                    }
+                    
+                    break;
+
+                case 10: //Sistema
+
+                    break;
+
+            }
+
+        }
+        
+        return falhas;
+    }
 
 
 }

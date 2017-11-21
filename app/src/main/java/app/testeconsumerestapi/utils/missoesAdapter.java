@@ -89,9 +89,9 @@ public class missoesAdapter extends BaseAdapter implements View.OnClickListener 
             /****** View Holder Object to contain tabitem.xml file elements ******/
 
             holder = new ViewHolder();
-            holder.nome =       (TextView) vi.findViewById(R.id.txt_nomeMissao);
-            holder.informacoes= (TextView) vi.findViewById(R.id.txt_infoMissao);
-            holder.xp=          (TextView) vi.findViewById(R.id.txt_xpMissao);
+            holder.nome = vi.findViewById(R.id.txt_nomeMissao);
+            holder.informacoes= vi.findViewById(R.id.txt_infoMissao);
+            holder.xp= vi.findViewById(R.id.txt_xpMissao);
 
             /************  Set holder with LayoutInflater ************/
             vi.setTag( holder );
@@ -108,7 +108,7 @@ public class missoesAdapter extends BaseAdapter implements View.OnClickListener 
         {
             /***** Get each Model object from Arraylist ********/
             missao =  null;
-            missao = (Missao) data.get(position);
+            missao = data.get(position);
 
             /************  Set Model values in Holder elements ***********/
 

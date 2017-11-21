@@ -46,16 +46,12 @@ public class usuariosDAO {
         resultado = db.insert(BancoDados.tblUsuarios, null, valores);
 
 
-        if (resultado == -1) {
-            return false;
-        } else { //Sucesso
-            return true;
-        }
+        return resultado != -1;
 
     }
 
     public Cursor loadPecas(ArrayList<String> fields){
-        return banco.selectDate(banco.tblUsuarios,fields);
+        return banco.selectDate(BancoDados.tblUsuarios,fields);
     }
 
 }

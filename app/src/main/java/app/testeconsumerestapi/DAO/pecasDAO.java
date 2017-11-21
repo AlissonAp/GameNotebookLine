@@ -42,7 +42,7 @@ public class pecasDAO {
 
         if(!pecas.isEmpty() && pecas != null) {
 
-            List<Peca> pecasExistentes = new otherFunctions().carregarpecas(context);
+            List<Peca> pecasExistentes = new otherFunctions().carregarpecas(context,null);
 
             try {
 
@@ -85,16 +85,12 @@ public class pecasDAO {
             }
         }
 
-        if(contaErros == 0){
-            return true;
-        }else{
-            return false;
-        }
+        return contaErros == 0;
 
     }
 
     public Cursor loadPecas(ArrayList<String> fields){
-        return banco.selectDate(banco.tblPecas,fields);
+        return banco.selectDate(BancoDados.tblPecas,fields);
     }
 
 }

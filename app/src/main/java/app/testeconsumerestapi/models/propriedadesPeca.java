@@ -7,92 +7,92 @@ package app.testeconsumerestapi.models;
 public class propriedadesPeca {
 
 
-    private Number GbMemoriaRam;			   // Medida em GB
-    private Number GbPlacaVideo;               // Medida em GB
-    private Number GbArmazenamento;            // Medida em GB
-    private Number MhzMemoriaRam;              // Medida em Mhz
-    private Number GhzProcessador;             // Medida em Ghz
-    private Number GhzPlacaVideo;              // Medida em Ghz
-    private Number RpmLeituraEscrita;	       // Medida em RPM
-    private Number NucleosProcessador;
+    private int GbMemoriaRam;			   // Medida em GB
+    private int GbPlacaVideo;               // Medida em GB
+    private int GbArmazenamento;            // Medida em GB
+    private int MhzMemoriaRam;              // Medida em Mhz
+    private int GhzProcessador;             // Medida em Ghz
+    private int GhzPlacaVideo;              // Medida em Ghz
+    private int RpmLeituraEscrita;	       // Medida em RPM
+    private int NucleosProcessador;
     private String ModeloProcessador;          // Pentiun, i3, i5, i7, amdfx
-    private Number BitsPlacaVideo;             // Medida em Bits , ex: 128 bits, 254 bits
-    private Number cacheProcessador;           // Medida em MB
-    private Number cacheArmazenamento;         // Medida em MB
-    private Number MahBateria;
-    private Number CelulasBateria;             // Medida em miliAmperes, Ex 2800mah
+    private int BitsPlacaVideo;             // Medida em Bits , ex: 128 bits, 254 bits
+    private int cacheProcessador;           // Medida em MB
+    private int cacheArmazenamento;         // Medida em MB
+    private int MahBateria;
+    private int CelulasBateria;             // Medida em miliAmperes, Ex 2800mah
     private String TipoTela;                   // LCD, LED, TOUCH
-    private Number TamanhoTela;                // 10, 14, 15, 15.6, 17 em polegadas
-    private Number ConexoesUSB;
+    private int TamanhoTela;                // 10, 14, 15, 15.6, 17 em polegadas
+    private int ConexoesUSB;
     private String PossuiBluetooth;            //S ou N
     private String PossuiWebCam;               //S ou N
     private String PossuiLeitorCd_Dvd;         //S ou N
     private String ResistenciaCarcaca;		   // Fraca, Média, Forte
-    private Number PesoCarcaca;			       // Medida em gramas
+    private int PesoCarcaca;			       // Medida em gramas
     private String PossuiEntradaHDMI;          // S ou N
     private String SistemaOperacional;         // Windows, Linux
 
-    public Number getGbMemoriaRam() {
+    public int getGbMemoriaRam() {
         return GbMemoriaRam;
     }
 
-    public void setGbMemoriaRam(Number gbMemoriaRam) {
+    public void setGbMemoriaRam(int gbMemoriaRam) {
         GbMemoriaRam = gbMemoriaRam;
     }
 
-    public Number getGbPlacaVideo() {
+    public int getGbPlacaVideo() {
         return GbPlacaVideo;
     }
 
-    public void setGbPlacaVideo(Number gbPlacaVideo) {
+    public void setGbPlacaVideo(int gbPlacaVideo) {
         GbPlacaVideo = gbPlacaVideo;
     }
 
-    public Number getGbArmazenamento() {
+    public int getGbArmazenamento() {
         return GbArmazenamento;
     }
 
-    public void setGbArmazenamento(Number gbArmazenamento) {
+    public void setGbArmazenamento(int gbArmazenamento) {
         GbArmazenamento = gbArmazenamento;
     }
 
-    public Number getMhzMemoriaRam() {
+    public int getMhzMemoriaRam() {
         return MhzMemoriaRam;
     }
 
-    public void setMhzMemoriaRam(Number mhzMemoriaRam) {
+    public void setMhzMemoriaRam(int mhzMemoriaRam) {
         MhzMemoriaRam = mhzMemoriaRam;
     }
 
-    public Number getGhzProcessador() {
+    public int getGhzProcessador() {
         return GhzProcessador;
     }
 
-    public void setGhzProcessador(Number ghzProcessador) {
+    public void setGhzProcessador(int ghzProcessador) {
         GhzProcessador = ghzProcessador;
     }
 
-    public Number getGhzPlacaVideo() {
+    public int getGhzPlacaVideo() {
         return GhzPlacaVideo;
     }
 
-    public void setGhzPlacaVideo(Number ghzPlacaVideo) {
+    public void setGhzPlacaVideo(int ghzPlacaVideo) {
         GhzPlacaVideo = ghzPlacaVideo;
     }
 
-    public Number getRpmLeituraEscrita() {
+    public int getRpmLeituraEscrita() {
         return RpmLeituraEscrita;
     }
 
-    public void setRpmLeituraEscrita(Number rpmLeituraEscrita) {
+    public void setRpmLeituraEscrita(int rpmLeituraEscrita) {
         RpmLeituraEscrita = rpmLeituraEscrita;
     }
 
-    public Number getNucleosProcessador() {
+    public int getNucleosProcessador() {
         return NucleosProcessador;
     }
 
-    public void setNucleosProcessador(Number nucleosProcessador) {
+    public void setNucleosProcessador(int nucleosProcessador) {
         NucleosProcessador = nucleosProcessador;
     }
 
@@ -104,43 +104,43 @@ public class propriedadesPeca {
         ModeloProcessador = modeloProcessador;
     }
 
-    public Number getBitsPlacaVideo() {
+    public int getBitsPlacaVideo() {
         return BitsPlacaVideo;
     }
 
-    public void setBitsPlacaVideo(Number bitsPlacaVideo) {
+    public void setBitsPlacaVideo(int bitsPlacaVideo) {
         BitsPlacaVideo = bitsPlacaVideo;
     }
 
-    public Number getCacheProcessador() {
+    public int getCacheProcessador() {
         return cacheProcessador;
     }
 
-    public void setCacheProcessador(Number cacheProcessador) {
+    public void setCacheProcessador(int cacheProcessador) {
         this.cacheProcessador = cacheProcessador;
     }
 
-    public Number getCacheArmazenamento() {
+    public int getCacheArmazenamento() {
         return cacheArmazenamento;
     }
 
-    public void setCacheArmazenamento(Number cacheArmazenamento) {
+    public void setCacheArmazenamento(int cacheArmazenamento) {
         this.cacheArmazenamento = cacheArmazenamento;
     }
 
-    public Number getMahBateria() {
+    public int getMahBateria() {
         return MahBateria;
     }
 
-    public void setMahBateria(Number mahBateria) {
+    public void setMahBateria(int mahBateria) {
         MahBateria = mahBateria;
     }
 
-    public Number getCelulasBateria() {
+    public int getCelulasBateria() {
         return CelulasBateria;
     }
 
-    public void setCelulasBateria(Number celulasBateria) {
+    public void setCelulasBateria(int celulasBateria) {
         CelulasBateria = celulasBateria;
     }
 
@@ -152,19 +152,19 @@ public class propriedadesPeca {
         TipoTela = tipoTela;
     }
 
-    public Number getTamanhoTela() {
+    public int getTamanhoTela() {
         return TamanhoTela;
     }
 
-    public void setTamanhoTela(Number tamanhoTela) {
+    public void setTamanhoTela(int tamanhoTela) {
         TamanhoTela = tamanhoTela;
     }
 
-    public Number getConexoesUSB() {
+    public int getConexoesUSB() {
         return ConexoesUSB;
     }
 
-    public void setConexoesUSB(Number conexoesUSB) {
+    public void setConexoesUSB(int conexoesUSB) {
         ConexoesUSB = conexoesUSB;
     }
 
@@ -200,11 +200,11 @@ public class propriedadesPeca {
         ResistenciaCarcaca = resistenciaCarcaca;
     }
 
-    public Number getPesoCarcaca() {
+    public int getPesoCarcaca() {
         return PesoCarcaca;
     }
 
-    public void setPesoCarcaca(Number pesoCarcaca) {
+    public void setPesoCarcaca(int pesoCarcaca) {
         PesoCarcaca = pesoCarcaca;
     }
 

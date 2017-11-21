@@ -75,16 +75,12 @@ public class missoesDAO {
             db.close();
         }
 
-            if (contaErros == 0) {
-                return true;
-            } else {
-                return false;
-            }
+        return contaErros == 0;
 
     }
 
     public Cursor loadMissoes(ArrayList<String> fields){
-        return banco.selectDate(banco.tblMissoes,fields);
+        return banco.selectDate(BancoDados.tblMissoes,fields);
     }
 
 }

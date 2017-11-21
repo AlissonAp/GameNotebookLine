@@ -1,12 +1,15 @@
 package app.testeconsumerestapi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import app.testeconsumerestapi.models.Missao;
 import app.testeconsumerestapi.utils.jsonToModel;
+import app.testeconsumerestapi.utils.otherFunctions;
 import app.testeconsumerestapi.utils.userFunctions;
 
 /**
@@ -60,13 +63,14 @@ public class startMissao extends AppCompatActivity {
 
         }
 
+    }
 
+    public void iniciarMissao(View view){
 
+        //redirect to next screen
+        Intent startScreen = new Intent(this, stepsSelecaoPecasMissao.class);
 
-
-
-
-
+        startActivity(startScreen);
 
     }
 

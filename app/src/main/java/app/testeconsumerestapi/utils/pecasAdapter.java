@@ -68,6 +68,7 @@ public class pecasAdapter extends RecyclerView.Adapter<pecasAdapter.ViewHolder> 
         public TextView  valorPeca;
 
         public ViewHolder(View itemView) {
+
             super(itemView);
             imagemPeca  = itemView.findViewById(R.id.imagemPeca);
             nomePeca    = itemView.findViewById(R.id.txtNomePeca);

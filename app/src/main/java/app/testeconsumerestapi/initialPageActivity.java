@@ -9,6 +9,7 @@ import android.view.View;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
+import app.testeconsumerestapi.models.Usuario;
 import app.testeconsumerestapi.utils.userFunctions;
 import okhttp3.OkHttpClient;
 
@@ -31,13 +32,16 @@ public class initialPageActivity extends AppCompatActivity {
 
             OkHttpClient client = new OkHttpClient();
 
-
             client.newBuilder().addInterceptor(new StethoInterceptor()).build();
 
-            // client.networkInterceptors().add();
+            //Verify if users session exists
+           Usuario usuario =  new userFunctions().GetUserSection(this);
+
+           if(usuario.getId() != null){ //if session exists then continue to mission screen
+               goToMissionList();
+           }
 
         }catch (Exception ex){
-
             new userFunctions().enviarNotificacao(this, ex.toString());
         }
 
@@ -55,6 +59,12 @@ public class initialPageActivity extends AppCompatActivity {
 
         Intent CreateUserScreen = new Intent(this,createUserActivity.class);
         startActivity(CreateUserScreen);
+
+    }
+
+    public void goToMissionList(){
+        Intent missoesScreen = new Intent(this, listMissaoActivity.class);
+        startActivity(missoesScreen);
 
     }
 

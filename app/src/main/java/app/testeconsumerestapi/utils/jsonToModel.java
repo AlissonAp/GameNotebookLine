@@ -13,6 +13,7 @@ import app.testeconsumerestapi.models.Missao;
 import app.testeconsumerestapi.models.Missoes;
 import app.testeconsumerestapi.models.Peca;
 import app.testeconsumerestapi.models.Pecas;
+import app.testeconsumerestapi.models.Usuario;
 import app.testeconsumerestapi.models.propriedadesPeca;
 import app.testeconsumerestapi.models.regrasMissao;
 import app.testeconsumerestapi.models.request;
@@ -101,6 +102,23 @@ public class jsonToModel {
 
         }
     }
+
+    public Usuario UsuarioFromJson(String JSON){
+
+        Gson gson = new Gson();
+
+        try {
+            Usuario usuario = gson.fromJson(jsonConverter(JSON), Usuario.class);
+
+            return usuario;
+        }catch(Exception ex){
+
+            return null;
+
+        }
+
+    }
+
 
     public JsonElement jsonConverter(String JSON){
 

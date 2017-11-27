@@ -18,6 +18,8 @@ import app.testeconsumerestapi.utils.userFunctions;
 
 public class startMissao extends AppCompatActivity {
 
+    String JsonMissao = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -43,7 +45,7 @@ public class startMissao extends AppCompatActivity {
         TextView txtInfoMissao       = (TextView) findViewById(R.id.txtInformacaoesMissao);
         TextView txtRecompensaMissao = (TextView) findViewById(R.id.txtRecompensas);
 
-        String JsonMissao = this.getIntent().getStringExtra("parameters");
+        JsonMissao = this.getIntent().getStringExtra("parameters");
 
         if (JsonMissao != null) {
 
@@ -69,6 +71,8 @@ public class startMissao extends AppCompatActivity {
 
         //redirect to next screen
         Intent startScreen = new Intent(this, stepsSelecaoPecasMissao.class);
+
+        startScreen.putExtra("currentMissao", JsonMissao);
 
         startActivity(startScreen);
 

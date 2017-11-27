@@ -103,11 +103,11 @@ public class otherFunctions {
 
         BancoDados bd = new BancoDados(contexto);
 
-        String sql = BancoDados.selectPeca;
+        String sql = "Select * From Pecas";
 
         //if the category passed to parameter then filter specified
         if(categoria != null){
-            sql += " Where "+BancoDados.pecaCategoria+ " = "+categoria.toString().trim();
+            sql += " Where "+BancoDados.pecaCategoria+ " = "+categoria.ordinal()+1;
         }
 
         Cursor c = bd.getReadableDatabase().rawQuery(sql,null);

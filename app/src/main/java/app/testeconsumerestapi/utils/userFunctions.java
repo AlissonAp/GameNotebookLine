@@ -100,20 +100,8 @@ public class userFunctions {
     public void Logout(Context context){
 
         // Start user session
-        SharedPreferences sharedPreferences = context.getSharedPreferences(info_sharedPreferences.UserPreferences, Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        //Delete user session if exists
-        editor.clear();
+        context.getSharedPreferences(info_sharedPreferences.UserPreferences, Context.MODE_PRIVATE).edit().clear().apply();
 
     }
-
-
-
-
-
-
-
 
 }

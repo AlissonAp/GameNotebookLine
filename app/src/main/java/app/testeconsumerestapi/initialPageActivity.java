@@ -37,7 +37,7 @@ public class initialPageActivity extends AppCompatActivity {
             //Verify if users session exists
            Usuario usuario =  new userFunctions().GetUserSection(this);
 
-           if(usuario != null){ //if session exists then continue to mission screen
+           if(usuario.getEmail() != null){ //if session exists then continue to mission screen
                goToMissionList();
            }
 

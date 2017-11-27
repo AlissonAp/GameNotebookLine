@@ -61,6 +61,8 @@ public class pecasAdapter extends RecyclerView.Adapter<pecasAdapter.ViewHolder> 
         return pecas.size();
     }
 
+
+
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView imagemPeca;

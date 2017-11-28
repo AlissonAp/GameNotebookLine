@@ -17,6 +17,8 @@ public class Usuario {
     private Number ultimaMissao;
     private Number dinheiro;
     private String ultimoAcesso;
+    private String imagem;
+
 
     public String getId() {
         return id;
@@ -88,5 +90,13 @@ public class Usuario {
 
     public void setUltimoAcesso(String ultimoAcesso) {
         this.ultimoAcesso = ultimoAcesso;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }

@@ -107,7 +107,7 @@ public class otherFunctions {
 
         //if the category passed to parameter then filter specified
         if(categoria != null){
-            sql += " Where "+BancoDados.pecaCategoria+ " = "+categoria.ordinal()+1;
+            sql += " Where "+BancoDados.pecaCategoria+ " = "+(categoria.ordinal()+1);
         }
 
         Cursor c = bd.getReadableDatabase().rawQuery(sql,null);
@@ -159,7 +159,10 @@ public class otherFunctions {
 
         ArrayList<String> falhas = new ArrayList<>();
 
-        for (Peca p : escolhasMissao.getPecas()){
+
+        List<Peca> pecas = escolhasMissao.getPecas();
+
+        for (Peca p : pecas){
 
             //convert category to enumeration
             switch (p.getCategoria()){

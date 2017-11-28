@@ -1,5 +1,6 @@
 package app.testeconsumerestapi;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,11 +18,14 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import app.testeconsumerestapi.Enumerations.categoriasPeca;
 import app.testeconsumerestapi.models.EscolhasMissao;
+import app.testeconsumerestapi.models.Missao;
 import app.testeconsumerestapi.models.Peca;
 import app.testeconsumerestapi.models.Usuario;
+import app.testeconsumerestapi.utils.jsonToModel;
 import app.testeconsumerestapi.utils.otherFunctions;
 import app.testeconsumerestapi.utils.pecasAdapter;
 import app.testeconsumerestapi.utils.pecasAdapter.ItemClickListener;
@@ -37,13 +41,14 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
     private int etapaMissao =  1;
     private categoriasPeca categoriaSelecionada = categoriasPeca.Carcaca;
     private Usuario usuario;
-    private EscolhasMissao escolhasMissao;
+    private EscolhasMissao escolhasMissao = new EscolhasMissao();
     private List<Peca> pecasEscolhidas = new ArrayList<>();
     private RecyclerView recyclerView;
     private Button btnProsseguir;
     private Peca pecaEscolhida;
     private int etapaAtual = 0;
-
+    private Missao missao;
+    private boolean selecionouPeca;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +66,14 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
             usuario = new userFunctions().GetUserSection(this);
             btnProsseguir = (Button) findViewById(R.id.btn_seguir);
 
+            String JsonMissao =  this.getIntent().getStringExtra("currentMissao");
+
+            if (JsonMissao != null) {
+                //Convert JSON to Object Missao
+                missao = new jsonToModel().MissaoFromJson(JsonMissao);
+            }
+
+
             //Initialize with 0
             avancarEtapa(recyclerView);
 
@@ -75,11 +88,28 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
         try {
 
             if (etapaAtual != 0) {
-                pecasEscolhidas.add(pecaEscolhida);
 
+                if(selecionouPeca) {
+                    pecasEscolhidas.add(pecaEscolhida);
+                    selecionouPeca = false;
+                }else{
+                    new userFunctions().enviarNotificacao(this,"Você não selecionou nenhuma peça nesta etapa!");
+                    etapaAtual -= 1;
+                }
                 //Clear peca data
                 pecaEscolhida = new Peca();
+            }else{
+                selecionouPeca = false;
             }
+
+
+            ImageView imgBitmap = (ImageView) findViewById(R.id.ImgPecaMaior);
+            imgBitmap.setImageBitmap(null);
+
+            TextView txtInformacoes = (TextView) findViewById(R.id.txtInformacoesPeca);
+
+            txtInformacoes.setText("");
+
 
             etapaAtual += 1;
 
@@ -144,6 +174,13 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
                 case 10:
                     etapa.setText("Etapa 10 - Sistema Operacional");
                     categoriaSelecionada = categoriasPeca.Sistema;
+                    btnProsseguir.setText("Concluir");
+                    break;
+                case 11:
+
+                    //Finalização da missão
+                    concluirMissao();
+
                     break;
             }
 
@@ -151,7 +188,6 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
             List<Peca> pecas = new otherFunctions().carregarpecas(this, categoriaSelecionada);
 
             adapter = new pecasAdapter(this, pecas);
-
 
             adapter.setClickListener(new ItemClickListener() {
                 @Override
@@ -171,6 +207,7 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
 
                         txtInformacoes.setText(pecaEscolhida.getInformacoes());
 
+                        selecionouPeca = true;
 
                     } catch (Exception ex) {
                         new userFunctions().enviarNotificacao(view.getContext(), ex.toString());
@@ -188,11 +225,36 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
 
     public void concluirMissao(){
 
-        escolhasMissao.setPecas(pecasEscolhidas);
+        try {
 
-        //verify rules of the mission with rules of the user choice
-      //  new otherFunctions().validateMissao(escolhasMissao,)
+            escolhasMissao.setPecas(pecasEscolhidas);
+
+            //verify rules of the mission with rules of the user choice
+            ArrayList<String> erros = new otherFunctions().validateMissao(escolhasMissao, missao);
+
+            //Call last screen with results from mission
+            TelaFinalMissao(erros);
+
+        }catch (Exception ex){
+
+        System.out.println("Excessao "+ ex.toString());
+
+        }
 
     }
+
+
+    public void TelaFinalMissao(ArrayList<String> results){
+
+        //redirect to next screen
+        Intent finishScreen = new Intent(this, finishMission.class);
+
+        finishScreen.putExtra("results", results);
+
+        startActivity(finishScreen);
+
+    }
+
+
 
 }

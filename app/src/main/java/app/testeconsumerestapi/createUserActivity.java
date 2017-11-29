@@ -72,7 +72,7 @@ public class createUserActivity extends AppCompatActivity {
                     retorno = retornoCadastro.msg;
 
                     //Direciona para a tela de login
-                    Intent LoginScreen = new Intent(this, loginUserActivity.class);
+                    Intent LoginScreen = new Intent(this, initialPageActivity.class);
                     startActivity(LoginScreen);
 
                 } else {

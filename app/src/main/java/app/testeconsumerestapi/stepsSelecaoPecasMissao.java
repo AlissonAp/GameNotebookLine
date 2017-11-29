@@ -91,6 +91,13 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
 
                 if(selecionouPeca) {
                     pecasEscolhidas.add(pecaEscolhida);
+
+                    int dinheiro = usuario.getDinheiro().intValue();
+
+                    usuario.setDinheiro(dinheiro - pecaEscolhida.getPreco());
+
+                    new userFunctions().UpdateUserSection(this,usuario);
+
                     selecionouPeca = false;
                 }else{
                     new userFunctions().enviarNotificacao(this,"Você não selecionou nenhuma peça nesta etapa!");
@@ -120,7 +127,7 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
 
 
             nivel.setText(usuario.getNivel().toString());
-            nomeUsuario.setText(usuario.getNome());
+            nomeUsuario.setText(usuario.getNome().toString());
             ouros.setText(usuario.getDinheiro().toString());
 
             switch (etapaAtual) {

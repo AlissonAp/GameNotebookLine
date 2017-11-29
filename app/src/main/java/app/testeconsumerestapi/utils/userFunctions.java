@@ -97,6 +97,13 @@ public class userFunctions {
         }
     }
 
+
+    public void UpdateUserSection(Context context, Usuario usuario){
+
+        SetUserSection(context,new modelToJson().ConvertUsuarioToModel(usuario));
+
+    }
+
     public void Logout(Context context){
 
         // Start user session

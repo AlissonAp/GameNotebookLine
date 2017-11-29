@@ -46,10 +46,13 @@ public class initialPageActivity extends AppCompatActivity {
            Usuario usuario =  new userFunctions().GetUserSection(this);
 
            if(usuario != null){ //if session exists then continue to mission screen
+
+               //Load mission date
+               new otherFunctions().LoadData(this);
+
                goToMissionList();
 
            }else{
-
 
                email = (EditText) findViewById(R.id.txtEmail);
                senha = (EditText) findViewById(R.id.txtSenha);

@@ -19,7 +19,6 @@ public class Usuario {
     private String ultimoAcesso;
     private String imagem;
 
-
     public String getId() {
         return id;
     }

@@ -171,9 +171,12 @@ public class otherFunctions {
                     
                     if(p.getPropriedades().getPesoCarcaca() != 0 && missao.getRegras().getRegraPesoCarcaca() != 0) {
 
+                        /*
                         if (p.getPropriedades().getPesoCarcaca() > missao.getRegras().getRegraPesoCarcaca()) {
                             falhas.add("O peso da carcaça escolhido é superior ao permitido");
                         }
+
+                        */
 
                         if (p.getPropriedades().getResistenciaCarcaca().indexOf("Fraca") > 0) {
                             if (missao.getRegras().getRegraResistenciaCarcaca().indexOf("Média") > 0 || missao.getRegras().getRegraResistenciaCarcaca().indexOf("Forte") > 0) {
@@ -211,6 +214,7 @@ public class otherFunctions {
                         falhas.add("O cache do processador é inferior ao mínimo necessário");
                     }
 
+                    /*
                     String modProcessador       = p.getPropriedades().getModeloProcessador();
                     String regramodProcessador  = missao.getRegras().getRegraModeloProcessador();
 
@@ -219,6 +223,8 @@ public class otherFunctions {
                             falhas.add("O modelo do processador não é suficiente para dar conta da configuração solicitada na missão");
                         }
                     }
+
+                    */
 
                     if(p.getPropriedades().getGhzProcessador() < missao.getRegras().getRegraGhzProcessador()){
                         falhas.add("A velocidade em GHz do processador não é suficiente para rodar a configuração solicitada na missão");

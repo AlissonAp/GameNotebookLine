@@ -28,7 +28,7 @@ public class userFunctions {
 
     }
 
-    public request CadastrarUsuario(Context contexto, EditText nome, EditText email, EditText senha, EditText confirmacaoSenha, ImageView img) {
+    public request CadastrarUsuario(Context contexto, String nome, String email, String senha, String confirmacaoSenha, ImageView img, int dinheiro, int nivel, int pontuacao) {
 
         userFunctions funcoes = new userFunctions();
 
@@ -36,12 +36,12 @@ public class userFunctions {
 
         Usuario usuario = new Usuario();
 
-        usuario.setEmail(email.getText().toString().trim());
-        usuario.setNome(nome.getText().toString().trim());
-        usuario.setSenha(senha.getText().toString().trim());
-        usuario.setDinheiro(10000);
-        usuario.setNivel(1);
-        usuario.setPontuacao(0);
+        usuario.setEmail(email);
+        usuario.setNome(nome);
+        usuario.setSenha(senha);
+        usuario.setDinheiro(dinheiro);
+        usuario.setNivel(nivel);
+        usuario.setPontuacao(pontuacao);
         usuario.setUltimaMissao(0);
         usuario.setUltimoAcesso(timeStamp);
 

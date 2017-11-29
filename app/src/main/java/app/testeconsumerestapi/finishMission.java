@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import app.testeconsumerestapi.models.Usuario;
+import app.testeconsumerestapi.utils.userFunctions;
+
 /**
  * Created by Alisson on 28/11/2017.
  */
@@ -24,11 +27,32 @@ public class finishMission extends AppCompatActivity {
 
         ArrayList<String> results =  this.getIntent().getStringArrayListExtra("results");
 
+        int totalgasto = this.getIntent().getIntExtra("valorGasto",0);
+        int totalXPMissao = this.getIntent().getIntExtra("XPGanho",0);
+
+        Usuario usuario = new Usuario();
+        usuario = new userFunctions().GetUserSection(this);
+
+
         TextView txtStatusMissao = (TextView) findViewById(R.id.txtStatusMissao);
         LinearLayout background = (LinearLayout) findViewById(R.id.layoutBackground);
 
         if(results.size() == 0){ //Sucesso na missao
-            txtStatusMissao.setText("Parabéns, você concluiu a missão com sucesso! Bom trabalho");
+            txtStatusMissao.setText("Parabéns, você concluiu a missão com sucesso e ganhou "+totalXPMissao+ " de experiência e "+totalgasto+ " de ouros!");
+
+            int ouros = usuario.getDinheiro().intValue();
+
+            usuario.setDinheiro(totalgasto + ouros + (totalXPMissao * 4));
+
+            int experiencia = usuario.getPontuacao().intValue();
+
+            usuario.setPontuacao(experiencia + totalXPMissao);
+
+            new userFunctions().UpdateUserSection(this,usuario);
+
+            //Atualiza usuário na API
+            new userFunctions().CadastrarUsuario(this,usuario.getNome(), usuario.getEmail(),usuario.getSenha(),usuario.getSenha(),null,usuario.getDinheiro().intValue(),usuario.getNivel().intValue(),usuario.getPontuacao().intValue());
+
 
         }else{ //Falha na missao
 
@@ -44,6 +68,7 @@ public class finishMission extends AppCompatActivity {
     }
 
     public void Concluir(View view){
+
         Intent missoesScreen = new Intent(this, listMissaoActivity.class);
 
         startActivity(missoesScreen);

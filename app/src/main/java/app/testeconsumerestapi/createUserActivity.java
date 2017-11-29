@@ -66,7 +66,7 @@ public class createUserActivity extends AppCompatActivity {
                 retorno = "As senhas não conferem!";
             } else {
 
-                request retornoCadastro = funcao.CadastrarUsuario(view.getContext(), nome, email, senha, confirmacaoSenha, img);
+                request retornoCadastro = funcao.CadastrarUsuario(view.getContext(), nome.getText().toString(), email.getText().toString(), senha.getText().toString(), confirmacaoSenha.getText().toString(), img,10000,1,0);
 
                 if (retornoCadastro.status != 500) {
                     retorno = retornoCadastro.msg;

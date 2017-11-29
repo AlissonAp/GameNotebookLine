@@ -44,6 +44,7 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
     private int etapaAtual = 0;
     private Missao missao;
     private boolean selecionouPeca;
+    private int totalgasto;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,6 +89,8 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
                     pecasEscolhidas.add(pecaEscolhida);
 
                     int dinheiro = usuario.getDinheiro().intValue();
+
+                    totalgasto += pecaEscolhida.getPreco();
 
                     usuario.setDinheiro(dinheiro - pecaEscolhida.getPreco());
 
@@ -252,6 +255,8 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
         Intent finishScreen = new Intent(this, finishMission.class);
 
         finishScreen.putExtra("results", results);
+        finishScreen.putExtra("valorGasto",totalgasto);
+        finishScreen.putExtra("XPGanho",missao.getXP());
 
         startActivity(finishScreen);
 

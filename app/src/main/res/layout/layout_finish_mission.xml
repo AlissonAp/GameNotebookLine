@@ -13,7 +13,7 @@
         android:layout_margin="20dp"
         android:text="TextView"
         android:textColor="#ffffff"
-        android:textSize="36sp"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
     <Button

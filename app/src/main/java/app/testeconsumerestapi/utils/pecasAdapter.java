@@ -51,7 +51,7 @@ public class pecasAdapter extends RecyclerView.Adapter<pecasAdapter.ViewHolder> 
 
         holder.imagemPeca.setImageBitmap(btmImage);
         holder.nomePeca.setText(descricaoPeca);
-        holder.valorPeca.setText(valorPeca);
+        holder.valorPeca.setText("Valor: "+valorPeca);
 
     }
 

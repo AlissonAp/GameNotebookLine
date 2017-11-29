@@ -63,7 +63,7 @@ public class listMissaoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
-//        try {
+        try {
 
         super.onCreate(savedInstanceState);
 
@@ -83,12 +83,12 @@ public class listMissaoActivity extends AppCompatActivity {
         PopulaUsuario();
 
 
-//        } catch (Exception ex) {
-//
-//            System.out.println("Excessao");
-//            new userFunctions().enviarNotificacao(this, ex.toString());
-//
-//        }
+        } catch (Exception ex) {
+
+            System.out.println("Excessao");
+            new userFunctions().enviarNotificacao(this, ex.toString());
+
+        }
     }
 
     public void PopulateMissoes() {
@@ -118,7 +118,6 @@ public class listMissaoActivity extends AppCompatActivity {
             txtDinheiro.setText("Ouros: " + usuario.getDinheiro().toString());
             txtNivel.setText("Nível: " + usuario.getNivel().toString());
             txtPontuacao.setText("Experiência: " + usuario.getPontuacao().toString());
-
 
             ImageView image = (ImageView) findViewById(R.id.imgUser);
 
@@ -163,10 +162,16 @@ public class listMissaoActivity extends AppCompatActivity {
 
             image.setImageBitmap(output);
         }else{
+
             finish();
         }
 
     }
 
+    public void Logout(View view){
+        new userFunctions().Logout(this);
+        finish();
+
+    }
 
 }

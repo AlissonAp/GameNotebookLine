@@ -4,17 +4,71 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button4"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:text="The Notebook Line Game"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textColor="#564b98"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:paddingTop="5dp"
+        android:src="@drawable/laptop" />
+
+    <TextView
+        android:id="@+id/viewEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fazer login"
-        android:onClick="goToLogin"/>
+        android:layout_margin="5dp"
+        android:layout_weight="0.00"
+        android:text="E-mail" />
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/viewSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="0.00"
+        android:text="Senha" />
+
+    <EditText
+        android:id="@+id/txtSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="0.00"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#6baeb8"
+        android:onClick="EfetuarLogin"
+        android:text="Entrar" />
+
 
     <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cadastrar novo usuário"
-        android:onClick="goToCreateUser"/>
+        android:layout_margin="20dp"
+        android:background="#7ec3a6"
+        android:onClick="goToCreateUser"
+        android:text="Cadastrar novo usuário" />
 </LinearLayout>

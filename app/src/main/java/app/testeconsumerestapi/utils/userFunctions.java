@@ -100,7 +100,7 @@ public class userFunctions {
     public void Logout(Context context){
 
         // Start user session
-        context.getSharedPreferences(info_sharedPreferences.UserPreferences, Context.MODE_PRIVATE).edit().clear().apply();
+        context.getSharedPreferences(info_sharedPreferences.UserPreferences, Context.MODE_PRIVATE).edit().clear().commit();
 
     }
 

@@ -1,9 +1,11 @@
 package app.testeconsumerestapi;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,7 +29,6 @@ public class finishMission extends AppCompatActivity {
 
         if(results.size() == 0){ //Sucesso na missao
             txtStatusMissao.setText("Parabéns, você concluiu a missão com sucesso! Bom trabalho");
-            background.setBackgroundColor(Color.parseColor("#00FF7F"));
 
         }else{ //Falha na missao
 
@@ -38,8 +39,15 @@ public class finishMission extends AppCompatActivity {
             }
 
             txtStatusMissao.setText(erros);
-            background.setBackgroundColor(Color.parseColor("#8B0000"));
         }
 
     }
+
+    public void Concluir(View view){
+        Intent missoesScreen = new Intent(this, listMissaoActivity.class);
+
+        startActivity(missoesScreen);
+
+    }
+
 }

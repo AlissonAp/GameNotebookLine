@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#0a5787"
-    android:id="@+id/layoutBackground">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/txtStatusMissao"
         android:layout_width="match_parent"
         android:layout_height="420dp"
         android:layout_margin="20dp"
+        android:text="TextView"
         android:textColor="#ffffff"
-        android:text="TextView" />
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnFinalizarMissao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#9dbbcf"
+        android:onClick="Concluir"
         android:text="Concluir" />
 </LinearLayout>

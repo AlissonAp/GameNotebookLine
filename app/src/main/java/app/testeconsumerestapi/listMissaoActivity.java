@@ -1,5 +1,6 @@
 package app.testeconsumerestapi;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -102,9 +103,9 @@ public class listMissaoActivity extends AppCompatActivity {
         if (usuario.getNome() != null) {
 
             txtNome.setText("Nome: " + usuario.getNome());
-            txtDinheiro.setText("Ouros: " + usuario.getDinheiro().toString());
-            txtNivel.setText("Nível: " + usuario.getNivel().toString());
-            txtPontuacao.setText("Experiência: " + usuario.getPontuacao().toString());
+            txtDinheiro.setText("Ouros: " + usuario.getDinheiro());
+            txtNivel.setText("Nível: " + usuario.getNivel());
+            txtPontuacao.setText("Experiência: " + usuario.getPontuacao());
 
             ImageView image = (ImageView) findViewById(R.id.imgUser);
 
@@ -157,7 +158,9 @@ public class listMissaoActivity extends AppCompatActivity {
 
     public void Logout(View view){
         new userFunctions().Logout(this);
-        finish();
+        Intent login = new Intent(this, initialPageActivity.class);
+
+        startActivity(login);
 
     }
 

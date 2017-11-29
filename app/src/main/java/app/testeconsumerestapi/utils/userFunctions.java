@@ -3,6 +3,7 @@ package app.testeconsumerestapi.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -27,7 +28,7 @@ public class userFunctions {
 
     }
 
-    public request CadastrarUsuario(Context contexto, EditText nome, EditText email, EditText senha, EditText confirmacaoSenha) {
+    public request CadastrarUsuario(Context contexto, EditText nome, EditText email, EditText senha, EditText confirmacaoSenha, ImageView img) {
 
         userFunctions funcoes = new userFunctions();
 
@@ -96,12 +97,11 @@ public class userFunctions {
         }
     }
 
-
     public void UpdateUserSection(Context context, Usuario usuario) {
         SetUserSection(context, new modelToJson().ConvertUsuarioToModel(usuario));
     }
 
-    public void Logout(Context context) {
+    public void Logout(Context context){
 
         // Start user session
         context.getSharedPreferences(info_sharedPreferences.UserPreferences, Context.MODE_PRIVATE).edit().clear().commit();

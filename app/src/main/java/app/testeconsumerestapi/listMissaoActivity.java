@@ -102,10 +102,10 @@ public class listMissaoActivity extends AppCompatActivity {
 
         if (usuario.getNome() != null) {
 
-            txtNome.setText("Nome: " + usuario.getNome());
-            txtDinheiro.setText("Ouros: " + usuario.getDinheiro());
-            txtNivel.setText("Nível: " + usuario.getNivel());
-            txtPontuacao.setText("Experiência: " + usuario.getPontuacao());
+            txtNome.setText("Nome: " + usuario.getNome().toString());
+            txtDinheiro.setText("Ouros: " + usuario.getDinheiro().toString());
+            txtNivel.setText("Nível: " + usuario.getNivel().toString());
+            txtPontuacao.setText("Experiência: " + usuario.getPontuacao().toString());
 
             ImageView image = (ImageView) findViewById(R.id.imgUser);
 

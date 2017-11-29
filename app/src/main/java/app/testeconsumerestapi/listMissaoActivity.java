@@ -1,36 +1,25 @@
 package app.testeconsumerestapi;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.TypedValue;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import app.testeconsumerestapi.models.Missao;
@@ -38,8 +27,6 @@ import app.testeconsumerestapi.models.Usuario;
 import app.testeconsumerestapi.utils.missoesAdapter;
 import app.testeconsumerestapi.utils.otherFunctions;
 import app.testeconsumerestapi.utils.userFunctions;
-
-import static android.R.attr.bitmap;
 
 /**
  * Created by Alisson on 03/11/2017.

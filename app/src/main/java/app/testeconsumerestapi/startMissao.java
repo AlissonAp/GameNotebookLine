@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import app.testeconsumerestapi.models.Missao;
 import app.testeconsumerestapi.utils.jsonToModel;
-import app.testeconsumerestapi.utils.otherFunctions;
 import app.testeconsumerestapi.utils.userFunctions;
 
 /**

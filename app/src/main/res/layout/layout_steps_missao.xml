@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPecas"
         android:layout_width="match_parent"
@@ -55,20 +57,21 @@
         android:id="@+id/txvNivel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="11dp"
-        android:text="Level"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/ImgPecaMaior" />
+        android:layout_marginTop="13dp"
+        android:layout_toStartOf="@+id/btn_seguir"
+        android:text="Level"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txvDinheiro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtNivel"
+        android:layout_alignBottom="@+id/txtNivel"
+        android:layout_toStartOf="@+id/txtOuro"
         android:text="Ouros"
-        android:layout_alignBaseline="@+id/txvNivel"
-        android:layout_alignBottom="@+id/txvNivel"
-        android:layout_alignStart="@+id/btn_seguir" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtNomeUser"
@@ -77,7 +80,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/txvNivel"
         android:layout_marginLeft="10dp"
-        android:text="Usuario" />
+        android:text="Usuario"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtOuro"
@@ -85,7 +89,8 @@
         android:layout_height="15dp"
         android:layout_alignBaseline="@+id/txvDinheiro"
         android:layout_alignBottom="@+id/txvDinheiro"
-        android:layout_alignEnd="@+id/btn_seguir" />
+        android:layout_toEndOf="@+id/ImgPecaMaior"
+        android:textAlignment="center" />
 
     <ImageView
         android:id="@+id/ImgPecaMaior"
@@ -109,8 +114,12 @@
         android:id="@+id/txtNivel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/txvNivel"
-        android:layout_centerHorizontal="true"
-        android:text="TextView" />
+        android:layout_alignBaseline="@+id/txvNivel"
+        android:layout_alignBottom="@+id/txvNivel"
+        android:layout_marginEnd="12dp"
+        android:layout_toStartOf="@+id/txvDinheiro"
+
+        android:text="TextView"
+        android:textAlignment="textStart" />
 
 </RelativeLayout>

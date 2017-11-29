@@ -1,6 +1,5 @@
 package app.testeconsumerestapi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,16 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
-import com.facebook.stetho.Stetho;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
-
-import app.testeconsumerestapi.models.Usuario;
 import app.testeconsumerestapi.models.request;
-import app.testeconsumerestapi.utils.info_sharedPreferences;
-import app.testeconsumerestapi.utils.jsonToModel;
 import app.testeconsumerestapi.utils.otherFunctions;
 import app.testeconsumerestapi.utils.userFunctions;
-import okhttp3.OkHttpClient;
 
 
 /**

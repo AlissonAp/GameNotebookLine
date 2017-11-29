@@ -12,13 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.stetho.common.ArrayListAccumulator;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import app.testeconsumerestapi.Enumerations.categoriasPeca;
 import app.testeconsumerestapi.models.EscolhasMissao;

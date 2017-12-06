@@ -36,10 +36,10 @@ public class usuariosDAO {
         valores.put(BancoDados.usuarioNome, usuario.getNome());
         valores.put(BancoDados.usuarioEmail, usuario.getEmail());
         valores.put(BancoDados.usuarioSenha, usuario.getSenha());
-        valores.put(BancoDados.usuarioDinheiro, (Double) usuario.getDinheiro());
-        valores.put(BancoDados.usuarioNivel, (Integer) usuario.getNivel());
-        valores.put(BancoDados.usuarioPontuacao, (Integer) usuario.getPontuacao());
-        valores.put(BancoDados.usuarioUltMissao, (Integer) usuario.getUltimaMissao());
+        valores.put(BancoDados.usuarioDinheiro, usuario.getDinheiro());
+        valores.put(BancoDados.usuarioNivel, usuario.getNivel());
+        valores.put(BancoDados.usuarioPontuacao,  usuario.getPontuacao());
+        valores.put(BancoDados.usuarioUltMissao,  usuario.getUltimaMissao());
         valores.put(BancoDados.usuarioUltAcesso, String.valueOf(usuario.getUltimoAcesso()));
         valores.put(BancoDados.usuarioNome, usuario.getNome());
 

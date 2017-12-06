@@ -28,7 +28,7 @@ public class userFunctions {
 
     }
 
-    public request CadastrarUsuario(Context contexto, String nome, String email, String senha, String confirmacaoSenha, ImageView img, int dinheiro, int nivel, int pontuacao) {
+    public request CadastrarUsuario(Context contexto, String nome, String email, String senha, String confirmacaoSenha, ImageView img, double dinheiro, long nivel, long pontuacao) {
 
         userFunctions funcoes = new userFunctions();
 

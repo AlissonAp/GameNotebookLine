@@ -62,6 +62,8 @@ public class missoesDAO {
                     cv.put(BancoDados.missaoCadastro, missao.getDataCadastro());
                     cv.put(BancoDados.missaoXP, missao.getXP());
 
+                    System.out.println(missao + " = " + cv.toString());
+
                     resultado = db.insert(BancoDados.tblMissoes, null, cv);
 
                     if (resultado == -1) {
@@ -80,6 +82,10 @@ public class missoesDAO {
     }
 
     public Cursor loadMissoes(ArrayList<String> fields){
+        return banco.selectDate(BancoDados.tblMissoes,fields);
+    }
+
+    public Cursor removeMissoes(ArrayList<String> fields){
         return banco.selectDate(BancoDados.tblMissoes,fields);
     }
 

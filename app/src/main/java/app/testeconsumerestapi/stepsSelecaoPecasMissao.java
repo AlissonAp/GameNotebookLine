@@ -30,10 +30,10 @@ import app.testeconsumerestapi.utils.userFunctions;
  * Created by Alisson on 11/11/2017.
  */
 
-public class stepsSelecaoPecasMissao extends AppCompatActivity{
+public class stepsSelecaoPecasMissao extends AppCompatActivity {
 
     private pecasAdapter adapter;
-    private int etapaMissao =  1;
+    private int etapaMissao = 1;
     private categoriasPeca categoriaSelecionada = categoriasPeca.Carcaca;
     private Usuario usuario;
     private EscolhasMissao escolhasMissao = new EscolhasMissao();
@@ -62,7 +62,7 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
             usuario = new userFunctions().GetUserSection(this);
             btnProsseguir = (Button) findViewById(R.id.btn_seguir);
 
-            String JsonMissao =  this.getIntent().getStringExtra("currentMissao");
+            String JsonMissao = this.getIntent().getStringExtra("currentMissao");
 
             if (JsonMissao != null) {
                 //Convert JSON to Object Missao
@@ -73,8 +73,8 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
             //Initialize with 0
             avancarEtapa(recyclerView);
 
-        }catch(Exception ex){
-            new userFunctions().enviarNotificacao(this,ex.toString());
+        } catch (Exception ex) {
+            new userFunctions().enviarNotificacao(this, ex.toString());
         }
 
     }
@@ -85,25 +85,34 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
 
             if (etapaAtual != 0) {
 
-                if(selecionouPeca) {
+                if (selecionouPeca) {
                     pecasEscolhidas.add(pecaEscolhida);
 
-                    int dinheiro = usuario.getDinheiro().intValue();
+                    Double dinheiro = usuario.getDinheiro();
 
-                    totalgasto += pecaEscolhida.getPreco();
+                    if (usuario.getDinheiro() >= pecaEscolhida.getPreco()) {
+                        totalgasto += pecaEscolhida.getPreco();
+                        usuario.setDinheiro(dinheiro - pecaEscolhida.getPreco());
+                    }else {
 
-                    usuario.setDinheiro(dinheiro - pecaEscolhida.getPreco());
+                        ArrayList<String> msg = new ArrayList<>();
+                        msg.add("Você não possui mais ouro suficiente para dar continuidade de a missão");
 
-                    new userFunctions().UpdateUserSection(this,usuario);
+                        //Call last screen with results from mission
+                        TelaFinalMissao(msg);
+
+                    }
+
+                    new userFunctions().UpdateUserSection(this, usuario);
 
                     selecionouPeca = false;
-                }else{
-                    new userFunctions().enviarNotificacao(this,"Você não selecionou nenhuma peça nesta etapa!");
+                } else {
+                    new userFunctions().enviarNotificacao(this, "Você não selecionou nenhuma peça nesta etapa!");
                     etapaAtual -= 1;
                 }
                 //Clear peca data
                 pecaEscolhida = new Peca();
-            }else{
+            } else {
                 selecionouPeca = false;
             }
 
@@ -124,7 +133,7 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
             TextView ouros = (TextView) findViewById(R.id.txtOuro);
 
 
-            nivel.setText(usuario.getNivel().toString());
+            nivel.setText(String.valueOf(usuario.getNivel()));
             nomeUsuario.setText(usuario.getNome().toString());
             ouros.setText(usuario.getDinheiro().toString());
 
@@ -222,13 +231,13 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
 
             recyclerView.setAdapter(adapter);
 
-        }catch(Exception ex){
-            new userFunctions().enviarNotificacao(this,ex.toString());
+        } catch (Exception ex) {
+            new userFunctions().enviarNotificacao(this, ex.toString());
         }
 
     }
 
-    public void concluirMissao(){
+    public void concluirMissao() {
 
         try {
 
@@ -237,31 +246,33 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity{
             //verify rules of the mission with rules of the user choice
             ArrayList<String> erros = new otherFunctions().validateMissao(escolhasMissao, missao);
 
+            if (erros.size() == 0)
+
+
             //Call last screen with results from mission
             TelaFinalMissao(erros);
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
 
-        System.out.println("Excessao "+ ex.toString());
+            System.out.println("Excessao " + ex.toString());
 
         }
 
     }
 
 
-    public void TelaFinalMissao(ArrayList<String> results){
+    public void TelaFinalMissao(ArrayList<String> results) {
 
         //redirect to next screen
         Intent finishScreen = new Intent(this, finishMission.class);
 
         finishScreen.putExtra("results", results);
-        finishScreen.putExtra("valorGasto",totalgasto);
-        finishScreen.putExtra("XPGanho",missao.getXP());
+        finishScreen.putExtra("valorGasto", totalgasto);
+        finishScreen.putExtra("XPGanho", missao.getXP());
 
         startActivity(finishScreen);
 
     }
-
 
 
 }

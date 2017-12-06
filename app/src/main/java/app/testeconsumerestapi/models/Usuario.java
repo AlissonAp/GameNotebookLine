@@ -2,6 +2,8 @@ package app.testeconsumerestapi.models;
 
 import java.util.Date;
 
+import static android.os.Build.VERSION_CODES.N;
+
 /**
  * Created by Alisson on 30/09/2017.
  */
@@ -12,12 +14,17 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private Number nivel;
-    private Number pontuacao;
-    private Number ultimaMissao;
-    private Number dinheiro;
+    private long nivel;
+    private long pontuacao;
+    private long ultimaMissao;
+    private Double dinheiro;
     private String ultimoAcesso;
     private String imagem;
+
+    public void addDinheiro(Double valor){
+
+        this.dinheiro += valor;
+    }
 
     public String getId() {
         return id;
@@ -51,35 +58,35 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Number getNivel() {
+    public long getNivel() {
         return nivel;
     }
 
-    public void setNivel(Number nivel) {
+    public void setNivel(long nivel) {
         this.nivel = nivel;
     }
 
-    public Number getPontuacao() {
+    public long getPontuacao() {
         return pontuacao;
     }
 
-    public void setPontuacao(Number pontuacao) {
+    public void setPontuacao(long pontuacao) {
         this.pontuacao = pontuacao;
     }
 
-    public Number getUltimaMissao() {
+    public long getUltimaMissao() {
         return ultimaMissao;
     }
 
-    public void setUltimaMissao(Number ultimaMissao) {
+    public void setUltimaMissao(long ultimaMissao) {
         this.ultimaMissao = ultimaMissao;
     }
 
-    public Number getDinheiro() {
+    public Double getDinheiro() {
         return dinheiro;
     }
 
-    public void setDinheiro(Number dinheiro) {
+    public void setDinheiro(Double dinheiro) {
         this.dinheiro = dinheiro;
     }
 

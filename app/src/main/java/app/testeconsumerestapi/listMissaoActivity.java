@@ -104,8 +104,8 @@ public class listMissaoActivity extends AppCompatActivity {
 
             txtNome.setText("Nome: " + usuario.getNome().toString());
             txtDinheiro.setText("Ouros: " + usuario.getDinheiro().toString());
-            txtNivel.setText("Nível: " + usuario.getNivel().toString());
-            txtPontuacao.setText("Experiência: " + usuario.getPontuacao().toString());
+            txtNivel.setText("Nível: " + String.valueOf(usuario.getNivel()));
+            txtPontuacao.setText("Experiência: " + String.valueOf(usuario.getPontuacao()));
 
             ImageView image = (ImageView) findViewById(R.id.imgUser);
 

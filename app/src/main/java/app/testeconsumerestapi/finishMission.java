@@ -40,18 +40,18 @@ public class finishMission extends AppCompatActivity {
         if(results.size() == 0){ //Sucesso na missao
             txtStatusMissao.setText("Parabéns, você concluiu a missão com sucesso e ganhou "+totalXPMissao+ " de experiência e "+totalgasto+ " de ouros!");
 
-            int ouros = usuario.getDinheiro().intValue();
+            Double ouros = usuario.getDinheiro();
 
             usuario.setDinheiro(totalgasto + ouros + (totalXPMissao * 4));
 
-            int experiencia = usuario.getPontuacao().intValue();
+            long experiencia = usuario.getPontuacao();
 
             usuario.setPontuacao(experiencia + totalXPMissao);
 
             new userFunctions().UpdateUserSection(this,usuario);
 
             //Atualiza usuário na API
-            new userFunctions().CadastrarUsuario(this,usuario.getNome(), usuario.getEmail(),usuario.getSenha(),usuario.getSenha(),null,usuario.getDinheiro().intValue(),usuario.getNivel().intValue(),usuario.getPontuacao().intValue());
+            new userFunctions().CadastrarUsuario(this,usuario.getNome(), usuario.getEmail(),usuario.getSenha(),usuario.getSenha(),null,usuario.getDinheiro().intValue(),usuario.getNivel(),usuario.getPontuacao());
 
 
         }else{ //Falha na missao

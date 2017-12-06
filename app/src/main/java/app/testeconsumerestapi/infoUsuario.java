@@ -29,8 +29,8 @@ public class infoUsuario extends AppCompatActivity {
 
         txtNome.setText(usuario.getNome());
         txtDinheiro.setText(usuario.getDinheiro().toString());
-        txtNivel.setText(usuario.getNivel().toString());
-        txtPontuacao.setText(usuario.getPontuacao().toString());
+        txtNivel.setText(String.valueOf(usuario.getNivel()));
+        txtPontuacao.setText(String.valueOf(usuario.getPontuacao()));
 
         finish();
 

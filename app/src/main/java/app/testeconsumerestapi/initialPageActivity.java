@@ -10,8 +10,14 @@ import android.widget.EditText;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import app.testeconsumerestapi.models.Usuario;
 import app.testeconsumerestapi.models.request;
+import app.testeconsumerestapi.utils.jsonToModel;
+import app.testeconsumerestapi.utils.modelToJson;
 import app.testeconsumerestapi.utils.otherFunctions;
 import app.testeconsumerestapi.utils.userFunctions;
 import okhttp3.OkHttpClient;
@@ -43,32 +49,32 @@ public class initialPageActivity extends AppCompatActivity {
 
 
             //Verify if users session exists
-           Usuario usuario =  new userFunctions().GetUserSection(this);
+            Usuario usuario = new userFunctions().GetUserSection(this);
 
-           if(usuario != null){ //if session exists then continue to mission screen
+            if (usuario != null) { //if session exists then continue to mission screen
 
-               //Load mission date
-               new otherFunctions().LoadData(this);
+                //Load mission date
+                new otherFunctions().LoadData(this);
 
-               goToMissionList();
+                goToMissionList();
 
-           }else{
+            } else {
 
-               email = (EditText) findViewById(R.id.txtEmail);
-               senha = (EditText) findViewById(R.id.txtSenha);
+                email = (EditText) findViewById(R.id.txtEmail);
+                senha = (EditText) findViewById(R.id.txtSenha);
 
-               email.setText("aaphardware@gmail.com");
-               senha.setText("1234");
+                email.setText("aaphardware@gmail.com");
+                senha.setText("1234");
 
-           }
+            }
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             new userFunctions().enviarNotificacao(this, ex.toString());
         }
 
     }
 
-    public void EfetuarLogin(View view){
+    public void EfetuarLogin(final View view) {
 
         String retorno = "";
 
@@ -77,7 +83,7 @@ public class initialPageActivity extends AppCompatActivity {
 
         userFunctions function = new userFunctions();
 
-        if(!email.getText().toString().isEmpty() && !senha.getText().toString().isEmpty()) {
+        if (!email.getText().toString().isEmpty() && !senha.getText().toString().isEmpty()) {
 
             request retornoAPI = function.FazerLogin(email, senha, view.getContext());
 
@@ -87,18 +93,24 @@ public class initialPageActivity extends AppCompatActivity {
 
                     retorno = "Usuário validado com sucesso!";
 
-                    if(!retornoAPI.msg.isEmpty()) {
+                    if (!retornoAPI.msg.isEmpty()) {
+
 
                         //Load mission date
                         new otherFunctions().LoadData(view.getContext());
 
-                        // Start user session
-                        new userFunctions().SetUserSection(this, retornoAPI.msg);
+
+                        Usuario user = new jsonToModel().UsuarioFromJson(retornoAPI.msg);
+
+                        user.setUltimoAcesso(new Date().toString());
+
+                        verificaOuroUser(user);
 
                         //redirect to next screen
                         Intent missoesScreen = new Intent(this, listMissaoActivity.class);
 
                         startActivity(missoesScreen);
+
 
                     }
                 } else {
@@ -107,31 +119,86 @@ public class initialPageActivity extends AppCompatActivity {
             } else {
                 retorno = "Houve uma falha ao validar o usuário";
             }
-        }else{
+        } else {
             retorno = "É necessário informar o e-mail e a senha!";
         }
 
-        function.enviarNotificacao(view.getContext(),retorno);
+        function.enviarNotificacao(view.getContext(), retorno);
 
     }
 
-    public void goToLogin(View view){
+    public void goToLogin(View view) {
 
-        Intent LoginScreen = new Intent(this,loginUserActivity.class);
+        Intent LoginScreen = new Intent(this, loginUserActivity.class);
         startActivity(LoginScreen);
 
     }
 
-    public void goToCreateUser(View view){
+    public void goToCreateUser(View view) {
 
-        Intent CreateUserScreen = new Intent(this,createUserActivity.class);
+        Intent CreateUserScreen = new Intent(this, createUserActivity.class);
         startActivity(CreateUserScreen);
 
     }
 
-    public void goToMissionList(){
+    public void goToMissionList() {
         Intent missoesScreen = new Intent(this, listMissaoActivity.class);
         startActivity(missoesScreen);
+
+    }
+
+    public Usuario verificaOuroUser(Usuario usuario) {
+//
+////        Date dataUltimoAcesso = new Date(usuario.getUltimoAcesso());
+//        Date dataAtual = new Date();
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//
+//        Date dataAtual = sdf.parse( "27/07/2006");
+//
+//
+//        Date dataUltimoAcesso = sdf.parse(usuario.getUltimoAcesso());
+//
+//
+//
+//        System.out.println(dataUltimoAcesso.toString() + " = " + dataAtual.toString());
+//
+//        if (dateDiff(dataUltimoAcesso, dataAtual, TimeUnit.HOURS) > 24) {
+
+            System.out.println("Somou ouros");
+            usuario.addDinheiro(500D);
+
+//        }
+
+
+        AlteraUsuario(usuario);
+
+        return usuario;
+    }
+
+    public static long dateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    }
+
+    public void AlteraUsuario(final Usuario user) {
+
+        Runnable r = new Runnable() {
+            public void run() {
+
+                System.out.println(user);
+
+                // Start user session
+                new userFunctions().SetUserSection(initialPageActivity.this, new modelToJson().ConvertUsuarioToModel(user));
+
+                //Atualiza usuário na API
+                new userFunctions().CadastrarUsuario(initialPageActivity.this, user.getNome(), user.getEmail(), user.getSenha(), user.getSenha(), null, user.getDinheiro().intValue(), user.getNivel(), user.getPontuacao());
+
+            }
+        };
+
+        Thread t = new Thread(r);
+        t.start();
 
     }
 

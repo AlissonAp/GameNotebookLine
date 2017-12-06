@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import app.testeconsumerestapi.models.Usuario;
+import app.testeconsumerestapi.utils.otherFunctions;
 import app.testeconsumerestapi.utils.userFunctions;
 
 /**
@@ -48,10 +49,21 @@ public class finishMission extends AppCompatActivity {
 
             usuario.setPontuacao(experiencia + totalXPMissao);
 
-            new userFunctions().UpdateUserSection(this,usuario);
+            final Usuario finalUsuario = usuario;
 
-            //Atualiza usuário na API
-            new userFunctions().CadastrarUsuario(this,usuario.getNome(), usuario.getEmail(),usuario.getSenha(),usuario.getSenha(),null,usuario.getDinheiro().intValue(),usuario.getNivel(),usuario.getPontuacao());
+            Thread thread = new Thread(){
+                public void run(){
+                    new userFunctions().UpdateUserSection(finishMission.this, finalUsuario);
+
+                    //Atualiza usuário na API
+                    new userFunctions().CadastrarUsuario(finishMission.this, finalUsuario.getNome(), finalUsuario.getEmail(), finalUsuario.getSenha(), finalUsuario.getSenha(),null, finalUsuario.getDinheiro().intValue(), finalUsuario.getNivel(), finalUsuario.getPontuacao());
+
+                }
+            };
+
+            thread.start();
+
+
 
 
         }else{ //Falha na missao

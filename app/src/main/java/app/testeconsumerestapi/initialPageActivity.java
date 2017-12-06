@@ -53,8 +53,15 @@ public class initialPageActivity extends AppCompatActivity {
 
             if (usuario != null) { //if session exists then continue to mission screen
 
-                //Load mission date
-                new otherFunctions().LoadData(this);
+                Thread thread = new Thread() {
+                    public void run() {
+                        //Load mission date
+                        new otherFunctions().LoadData(initialPageActivity.this);
+                    }
+                };
+
+                thread.start();
+
 
                 goToMissionList();
 
@@ -81,49 +88,60 @@ public class initialPageActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.txtEmail);
         senha = (EditText) findViewById(R.id.txtSenha);
 
-        userFunctions function = new userFunctions();
+        try {
 
-        if (!email.getText().toString().isEmpty() && !senha.getText().toString().isEmpty()) {
+            userFunctions function = new userFunctions();
 
-            request retornoAPI = function.FazerLogin(email, senha, view.getContext());
+            if (!email.getText().toString().isEmpty() && !senha.getText().toString().isEmpty()) {
 
-            if (retornoAPI.status != 500) {
+                request retornoAPI = function.FazerLogin(email, senha, view.getContext());
 
-                if (retornoAPI.ok == true) { //user validate success
+                if (retornoAPI.status != 500) {
 
-                    retorno = "Usuário validado com sucesso!";
+                    if (retornoAPI.ok == true) { //user validate success
 
-                    if (!retornoAPI.msg.isEmpty()) {
+                        retorno = "Usuário validado com sucesso!";
 
-
-                        //Load mission date
-                        new otherFunctions().LoadData(view.getContext());
+                        if (!retornoAPI.msg.isEmpty()) {
 
 
-                        Usuario user = new jsonToModel().UsuarioFromJson(retornoAPI.msg);
+                            Thread thread = new Thread() {
+                                public void run() {
+                                    //Load mission date
+                                    new otherFunctions().LoadData(view.getContext());
+                                }
+                            };
 
-                        user.setUltimoAcesso(new Date().toString());
+                            thread.start();
 
-                        verificaOuroUser(user);
+                            Usuario user = new jsonToModel().UsuarioFromJson(retornoAPI.msg);
 
-                        //redirect to next screen
-                        Intent missoesScreen = new Intent(this, listMissaoActivity.class);
+                            user.setUltimoAcesso(new Date().toString());
 
-                        startActivity(missoesScreen);
+                            verificaOuroUser(user);
+
+                            //redirect to next screen
+                            Intent missoesScreen = new Intent(this, listMissaoActivity.class);
+
+                            startActivity(missoesScreen);
 
 
+                        }
+                    } else {
+                        retorno = retornoAPI.msg;
                     }
                 } else {
-                    retorno = retornoAPI.msg;
+                    retorno = "Houve uma falha ao validar o usuário";
                 }
             } else {
-                retorno = "Houve uma falha ao validar o usuário";
+                retorno = "É necessário informar o e-mail e a senha!";
             }
-        } else {
-            retorno = "É necessário informar o e-mail e a senha!";
-        }
 
-        function.enviarNotificacao(view.getContext(), retorno);
+            function.enviarNotificacao(view.getContext(), retorno);
+
+        } catch (Exception ex) {
+            new userFunctions().enviarNotificacao(this, ex.toString());
+        }
 
     }
 
@@ -165,8 +183,8 @@ public class initialPageActivity extends AppCompatActivity {
 //
 //        if (dateDiff(dataUltimoAcesso, dataAtual, TimeUnit.HOURS) > 24) {
 
-            System.out.println("Somou ouros");
-            usuario.addDinheiro(500D);
+        System.out.println("Somou ouros");
+        usuario.addDinheiro(500D);
 
 //        }
 
@@ -183,7 +201,7 @@ public class initialPageActivity extends AppCompatActivity {
 
     public void AlteraUsuario(final Usuario user) {
 
-        Runnable r = new Runnable() {
+        Thread thread = new Thread() {
             public void run() {
 
                 System.out.println(user);
@@ -197,8 +215,8 @@ public class initialPageActivity extends AppCompatActivity {
             }
         };
 
-        Thread t = new Thread(r);
-        t.start();
+        thread.start();
+
 
     }
 

@@ -246,11 +246,9 @@ public class stepsSelecaoPecasMissao extends AppCompatActivity {
             //verify rules of the mission with rules of the user choice
             ArrayList<String> erros = new otherFunctions().validateMissao(escolhasMissao, missao);
 
-            if (erros.size() == 0)
-
-
             //Call last screen with results from mission
             TelaFinalMissao(erros);
+
 
         } catch (Exception ex) {
 
